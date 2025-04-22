@@ -1,0 +1,4225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>PowerSup | Suplementos Esportivos Premium</title>
+		<!-- Meta tags para compartilhamento social -->
+        <meta property="og:title" content="PowerSup | Suplementos Esportivos Premium" />
+        <meta property="og:description" content="Conheça a PowerSup! Suplementos de alta performance para quem leva o treino a sério." />
+        <meta property="og:image" content="https://powersup1.netlify.app/images/power.png" />
+        <meta property="og:url" content="https://powersup1.netlify.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="PowerSup" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+			    darkMode: 'class',
+			    theme: {
+			        extend: {
+			            colors: {
+			                primary: '#5D5CDE',
+			                secondary: '#1f1f1f',
+			                light: '#f5f5f5',
+			                dark: '#181818'
+			            },
+			            fontFamily: {
+			                montserrat: ['Montserrat', 'sans-serif']
+			            }
+			        }
+			    }
+			}
+
+			// Detectar modo escuro/claro
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			    document.documentElement.classList.add('dark');
+			}
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+			    if (event.matches) {
+			        document.documentElement.classList.add('dark');
+			    } else {
+			        document.documentElement.classList.remove('dark');
+			    }
+			});
+		</script>
+		<style>
+            .product-card img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                display: block;
+                max-height: 200px; /* Ajuste a altura conforme necessário */
+                margin: 0 auto;
+            }
+            
+			* {
+			    margin: 0;
+			    padding: 0;
+			    box-sizing: border-box;
+			    font-family: 'Montserrat', sans-serif;
+			}
+
+			html {
+			    scroll-behavior: smooth;
+			}
+
+			body {
+			    overflow-x: hidden;
+			}
+
+			/* Animações */
+			@keyframes fadeIn {
+			    from { opacity: 0; transform: translateY(20px); }
+			    to { opacity: 1; transform: translateY(0); }
+			}
+
+			.animate {
+			    animation: fadeIn 0.8s ease forwards;
+			}
+
+			/* Carrossel de Banner */
+			.carousel {
+			    position: relative;
+			    height: 500px;
+			    overflow: hidden;
+			}
+
+			.carousel-inner {
+			    display: flex;
+			    transition: transform 0.5s ease;
+			    height: 100%;
+			}
+
+			.carousel-item {
+			    min-width: 100%;
+			    height: 100%;
+			    background-size: cover;
+			    background-position: center;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    color: white;
+			}
+
+			.carousel-content {
+			    text-align: center;
+			    max-width: 80%;
+			    padding: 20px;
+			    background-color: rgba(0, 0, 0, 0.6);
+			    border-radius: 10px;
+			}
+
+			.carousel-indicators {
+			    position: absolute;
+			    bottom: 20px;
+			    left: 50%;
+			    transform: translateX(-50%);
+			    display: flex;
+			    gap: 10px;
+			}
+
+			.carousel-indicator {
+			    width: 12px;
+			    height: 12px;
+			    border-radius: 50%;
+			    background-color: rgba(255, 255, 255, 0.5);
+			    cursor: pointer;
+			    transition: all 0.3s ease;
+			}
+
+			.carousel-indicator.active {
+			    background-color: white;
+			    transform: scale(1.2);
+			}
+
+			.carousel-control {
+			    position: absolute;
+			    top: 50%;
+			    transform: translateY(-50%);
+			    width: 50px;
+			    height: 50px;
+			    background-color: rgba(0, 0, 0, 0.5);
+			    border-radius: 50%;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    color: white;
+			    font-size: 1.5rem;
+			    cursor: pointer;
+			    transition: all 0.3s ease;
+			    z-index: 10;
+			}
+
+			.carousel-control:hover {
+			    background-color: rgba(0, 0, 0, 0.8);
+			}
+
+			.carousel-control-prev {
+			    left: 20px;
+			}
+
+			.carousel-control-next {
+			    right: 20px;
+			}
+
+			/* Navegação das Páginas */
+			.page {
+			    display: none;
+			}
+
+			.page.active {
+			    display: block;
+			}
+
+			/* Produtos */
+			.product-grid {
+			    display: grid;
+			    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			    gap: 25px;
+			}
+
+			.product-card {
+			    border-radius: 10px;
+			    overflow: hidden;
+			    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+			    transition: transform 0.3s ease, box-shadow 0.3s ease;
+			    position: relative;
+			}
+
+			.product-card:hover {
+			    transform: translateY(-7px);
+			    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+			}
+
+			.product-tag {
+			    position: absolute;
+			    top: 10px;
+			    right: 10px;
+			    padding: 5px 10px;
+			    border-radius: 3px;
+			    font-size: 0.8rem;
+			    font-weight: 600;
+			    z-index: 1;
+                display: none; /* Removendo a tag azul dos produtos */
+			}
+
+			/* Modo escuro */
+            .dark input[type="number"] {
+                background-color: #333;
+                color: #fff;
+                border: 1px solid #333;
+                border-radius: 4px;
+                padding: 4px 8px;
+            }
+            
+			.dark body {
+			    background-color: #181818;
+			    color: #f5f5f5;
+			}
+
+			.dark .bg-white {
+			    background-color: #222;
+			}
+
+			.dark .text-gray-800 {
+			    color: #f5f5f5;
+			}
+
+			.dark .text-gray-600 {
+			    color: #aaa;
+			}
+
+			.dark .border-gray-200 {
+			    border-color: #333;
+			}
+
+			.dark .shadow {
+			    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+			}
+
+			/* Loading Spinner */
+			.spinner {
+			    border: 4px solid rgba(0, 0, 0, 0.1);
+			    width: 40px;
+			    height: 40px;
+			    border-radius: 50%;
+			    border-left-color: #5D5CDE;
+			    animation: spin 1s linear infinite;
+			}
+
+			@keyframes spin {
+			    0% { transform: rotate(0deg); }
+			    100% { transform: rotate(360deg); }
+			}
+
+			.dark .spinner {
+			    border: 4px solid rgba(255, 255, 255, 0.1);
+			    border-left-color: #5D5CDE;
+			}
+
+			/* Quiz */
+			.quiz-container {
+			    max-width: 800px;
+			    margin: 0 auto;
+			}
+
+			.quiz-question {
+			    display: none;
+			}
+
+			.quiz-question.active {
+			    display: block;
+			    animation: fadeIn 0.5s ease;
+			}
+
+			.quiz-option {
+			    cursor: pointer;
+			    transition: all 0.3s ease;
+			}
+
+			.quiz-option:hover {
+			    transform: translateY(-3px);
+			}
+
+			.quiz-progress-bar {
+			    height: 8px;
+			    background-color: #e2e8f0;
+			    border-radius: 4px;
+			    overflow: hidden;
+			}
+
+			.quiz-progress {
+			    height: 100%;
+			    background-color: #5D5CDE;
+			    transition: width 0.3s ease;
+			}
+
+			/* Trainer Plans */
+			.plan-card {
+			    transition: all 0.3s ease;
+			}
+
+			.plan-card:hover {
+			    transform: translateY(-10px);
+			}
+
+			.plan-feature {
+			    position: relative;
+			    padding-left: 30px;
+			}
+
+			.plan-feature:before {
+			    content: '✓';
+			    position: absolute;
+			    left: 0;
+			    color: #5D5CDE;
+			    font-weight: bold;
+			}
+            
+            /* Acordeão de Suplementos */
+			.supplement-accordion {
+			    cursor: pointer;
+			    transition: all 0.3s ease;
+			}
+
+			.supplement-panel {
+			    max-height: 0;
+			    overflow: hidden;
+			    transition: max-height 0.4s ease-in-out;
+			}
+
+			.supplement-panel.active {
+			    max-height: 1000px;
+			}
+            
+            /* Formulário de checkout */
+            #checkout-form {
+                max-height: 70vh;
+                overflow-y: auto;
+                padding-right: 10px;
+            }
+            
+            /* Scrollbar personalizada */
+            #checkout-form::-webkit-scrollbar {
+                width: 6px;
+            }
+            
+            #checkout-form::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            
+            #checkout-form::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 10px;
+            }
+            
+            #checkout-form::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+            
+            .dark #checkout-form::-webkit-scrollbar-track {
+                background: #333;
+            }
+            
+            .dark #checkout-form::-webkit-scrollbar-thumb {
+                background: #666;
+            }
+            
+            /* Layout para celular - 2 itens lado a lado */
+            @media (max-width: 640px) {
+                .product-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                }
+                
+                .product-card {
+                    margin-bottom: 0;
+                }
+                
+                .product-card .product-name {
+                    font-size: 0.9rem;
+                    white-space: normal;
+                    height: auto;
+                }
+                
+                /* Layout para produtos na página principal (2 por linha) */
+                .product-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Garante proporção igual */
+                    gap: 10px;
+                    margin: 0 -5px; /* Compensa o gap para usar toda a largura */
+                }
+            
+                .product-card {
+                    height: 100%; /* Uniformiza a altura */
+                    display: flex;
+                    flex-direction: column;
+                    margin: 0;
+                }
+            
+               .product-card .product-name {
+                    font-size: 0.8rem;
+                    line-height: 1.2;
+                    min-height: 2.4rem; /* Evita desalinhamento */
+                    margin-bottom: 4px;
+
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    line-clamp: 2; /* Padrão, para compatibilidade futura */
+
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                
+                .product-card .add-to-cart-btn {
+                    padding: 8px;
+                    width: 100%;
+                    justify-content: center;
+                }
+            
+                .product-card .add-to-cart-btn i {
+                    margin: 0 5px 0 0;
+                    font-size: 0.9rem;
+                }
+            
+                /* Ajuste para imagens */
+                .product-card > div:first-child {
+                    height: 120px !important;
+                }
+            
+                /* Preços alinhados */
+                .product-card > div:last-child > div {
+                    flex-direction: column;
+                    align-items: start;
+                    gap: 6px;
+                }
+            
+                .product-card .text-xl {
+                    font-size: 1rem;
+                }
+                
+                /* Categorias 2 por linha no mobile */
+                .grid-cols-1.sm\:grid-cols-2.md\:grid-cols-3.lg\:grid-cols-4 {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                
+                .category-card {
+                    margin-bottom: 10px;
+                }
+                
+                /* Centralizar o footer no mobile */
+                .footer-bottom-content {
+                    margin: 0 auto;
+                    text-align: center;
+                }
+            }
+            
+            /* Fix para o carrinho que estava no meio da tela */
+            #cart-sidebar {
+                right: 0;
+                left: auto;
+                max-width: 100%;
+            }
+            
+            /* Botões dinamicamente atualizados */
+            .add-to-cart-btn.added {
+                background-color: #22c55e; /* Verde para feedback de sucesso */
+            }
+            
+            /* Versão mobile do carrinho */
+            @media (max-width: 640px) {
+                #cart-sidebar {
+                    width: 100% !important;
+                    left: 0;
+                    right: 0;
+                }
+            }
+            
+            /* Ajustes para categorias no mobile */
+            @media (max-width: 640px) {
+                .category-card {
+                    max-width: 100% !important;
+                }
+            }
+            
+            /* Adicionar scroll no modal do produto */
+            #product-modal .relative {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            /* Ajustes para imagens do Quiz - Corrigido */
+            #quiz-results .bg-white, 
+            #quiz-results .dark\:bg-gray-800 {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            #quiz-results .bg-white img, 
+            #quiz-results .dark\:bg-gray-800 img {
+                width: 100%;
+                height: 160px;
+                object-fit: contain;
+                object-position: center;
+                margin: 0 auto;
+            }
+            
+            #quiz-results .h-48 {
+                height: auto;
+                max-height: 160px;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            @media (max-width: 640px) {
+                #quiz-results .h-48 {
+                    max-height: 120px;
+                }
+                
+                #quiz-results .grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                }
+                
+                #quiz-results .product-name {
+                    font-size: 0.8rem;
+                    -webkit-line-clamp: 2;
+                    line-clamp: 2;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+		</style>
+	</head>
+	<body class="bg-light dark:bg-dark text-gray-800 dark:text-white">
+		<!-- Header/Navegação -->
+		<header class="bg-secondary text-white shadow-md sticky top-0 z-50">
+			<div class="container mx-auto px-4">
+				<div class="flex items-center justify-between py-4">
+					<a href="#" class="flex items-center text-2xl font-extrabold" id="logo">
+						<div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
+							<i class="fas fa-dumbbell text-white"></i>
+						</div>
+						POWER<span class="text-primary">SUP</span>
+					</a>
+
+					<div class="hidden md:flex space-x-8">
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="home">Home</a>
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="products">Produtos</a>
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="personal-trainer">Personal Trainer</a>
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="quiz">Quiz</a>
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="guide">Guia</a>
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="about">Quem Somos</a>
+						<a href="#" class="nav-link py-2 hover:text-primary transition" data-page="contact">Contato</a>
+					</div>
+
+					<div class="hidden md:block relative mr-4">
+						<input type="text" id="search-input" placeholder="Buscar produtos..." class="bg-gray-700 text-white rounded-full py-2 pl-4 pr-10 w-64 focus:outline-none focus:ring-2 focus:ring-primary text-base" />
+						<button id="search-button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-primary">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+
+					<div class="hidden md:flex space-x-4 items-center">
+						<button id="theme-toggle" class="text-lg hover:text-primary transition">
+							<i class="fas fa-moon dark:hidden"></i>
+							<i class="fas fa-sun hidden dark:inline"></i>
+						</button>
+						<a href="#" class="text-lg hover:text-primary transition relative" id="cart-btn">
+							<i class="fas fa-shopping-cart"></i>
+							<span class="absolute -top-2 -right-2 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center" id="cart-count">0</span>
+						</a>
+					</div>
+
+					<div class="md:hidden flex items-center space-x-4">
+						<button id="mobile-theme-toggle" class="text-lg hover:text-primary transition">
+							<i class="fas fa-moon dark:hidden"></i>
+							<i class="fas fa-sun hidden dark:inline"></i>
+						</button>
+						<a href="#" class="text-lg hover:text-primary transition relative" id="mobile-cart-btn">
+							<i class="fas fa-shopping-cart"></i>
+							<span class="absolute -top-2 -right-2 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center" id="mobile-cart-count">0</span>
+						</a>
+						<button class="text-2xl" id="mobile-menu-btn">
+							<i class="fas fa-bars"></i>
+						</button>
+					</div>
+				</div>
+
+				<!-- Menu mobile -->
+				<div class="md:hidden hidden" id="mobile-menu">
+					<div class="flex flex-col space-y-4 pb-4">
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="home">Home</a>
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="products">Produtos</a>
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="personal-trainer">Personal Trainer</a>
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="quiz">Quiz</a>
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="guide">Guia</a>
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="about">Quem Somos</a>
+						<a href="#" class="mobile-nav-link py-2 hover:text-primary transition" data-page="contact">Contato</a>
+					</div>
+					<div class="relative pb-4">
+						<input type="text" id="mobile-search-input" placeholder="Buscar produtos..." class="w-full bg-gray-700 text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary text-base" />
+						<button id="mobile-search-button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-primary">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<!-- Conteúdo Principal -->
+		<main>
+			<!-- Página Home -->
+			<section id="home" class="page active">
+				<!-- Carrossel de Banner -->
+				<div class="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item bg-secondary" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+							<div class="carousel-content">
+								<h2 class="text-4xl font-bold mb-4">Suplementos de Alta Performance</h2>
+								<p class="text-xl">Maximize seus resultados com produtos de qualidade premium</p>
+							</div>
+						</div>
+						<div class="carousel-item bg-secondary" style="background-image: url('https://images.unsplash.com/photo-1579758629938-03607ccdbaba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+							<div class="carousel-content">
+								<h2 class="text-4xl font-bold mb-4">Treinos Intensos Pedem Nutrição Adequada</h2>
+								<p class="text-xl">Conheça nossa linha completa de suplementos</p>
+							</div>
+						</div>
+						<div class="carousel-item bg-secondary" style="background-image: url('https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+							<div class="carousel-content">
+								<h2 class="text-4xl font-bold mb-4">Resultados Visíveis</h2>
+								<p class="text-xl">Suplemente sua dieta e alcance seus objetivos</p>
+							</div>
+						</div>
+						<div class="carousel-item bg-secondary" style="background-image: url('https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+							<div class="carousel-content">
+								<h2 class="text-4xl font-bold mb-4">Produtos Para Todos os Objetivos</h2>
+								<p class="text-xl">Do ganho de massa à definição muscular</p>
+							</div>
+						</div>
+						<div class="carousel-item bg-secondary" style="background-image: url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+							<div class="carousel-content">
+								<h2 class="text-4xl font-bold mb-4">Energia e Foco</h2>
+								<p class="text-xl">Suplementos para potencializar cada treino</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="carousel-controls">
+						<div class="carousel-control carousel-control-prev">
+							<i class="fas fa-chevron-left"></i>
+						</div>
+						<div class="carousel-control carousel-control-next">
+							<i class="fas fa-chevron-right"></i>
+						</div>
+					</div>
+
+					<div class="carousel-indicators">
+						<div class="carousel-indicator active" data-index="0"></div>
+						<div class="carousel-indicator" data-index="1"></div>
+						<div class="carousel-indicator" data-index="2"></div>
+						<div class="carousel-indicator" data-index="3"></div>
+						<div class="carousel-indicator" data-index="4"></div>
+					</div>
+				</div>
+
+				<!-- Categorias -->
+<div class="container mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+      Categorias
+    </h2>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  
+      <!-- Categoria 1 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="whey">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/whey2.png" alt="Proteínas" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Proteínas</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 2 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="pre-workout">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/pre.png" alt="Pré-Treinos" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Pré-Treinos</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 3 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="creatine">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/creatina-int.png" alt="Creatina" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Creatina</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 4 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="thermogenic">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/termo.png" alt="Termogênicos" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Termogênicos</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 5 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="bcaa">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/bcaa-prox.png" alt="Aminoácidos e BCAAs" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Aminoácidos e BCAAs</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 6 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="hypercaloric">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/hiper.png" alt="Hipercalóricos" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Hipercalóricos</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 7 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="vitamins">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/multivita.png" alt="Vitaminas e Multivitamínicos" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Vitaminas e Multivitamínicos</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 8 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="protein-bars">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/capasta.png" alt="Pastas e Barras Proteicas" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Pastas e Barras Proteicas</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 9 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="testo-booster">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/ZMA.png" alt="Suplementos Hormonais Testo Boosters" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Suplementos Hormonais Testo Boosters</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 10 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="health">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/d3.png" alt="Saúde e Bem-estar" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Saúde e Bem-estar</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 11 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="intra-workout">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/malto.png" alt="Repositor Energético Intra-Treino" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Repositor Energético Intra-Treino</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+      <!-- Categoria 12 -->
+      <div class="category-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:-translate-y-2 hover:shadow-lg cursor-pointer w-full max-w-[260px] mx-auto" data-category="accessories">
+        <div class="bg-gray-200 dark:bg-gray-700 flex items-center justify-center h-[180px]">
+          <img src="images/balac.png" alt="Acessórios" class="object-contain max-h-[160px] w-auto" />
+        </div>
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Acessórios</h3>
+          <button class="mt-3 px-5 py-1.5 border border-indigo-600 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition text-sm font-medium">Ver Produtos</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+                                <!-- Quiz Promocional -->
+				<div class="bg-primary text-white py-16 text-center">
+					<div class="container mx-auto px-4">
+						<h2 class="text-3xl font-bold mb-4">Descubra os Suplementos Ideais para Você!</h2>
+						<p class="text-xl mb-8">Responda nosso quiz rápido e saiba exatamente quais suplementos combinam com seus objetivos</p>
+						<a href="#" class="bg-white text-primary px-8 py-3 font-semibold rounded-lg hover:bg-gray-100 transition inline-block" data-page="quiz">
+							Fazer o Quiz Agora
+						</a>
+					</div>
+				</div>
+
+				<!-- Quem Somos (Resumo) -->
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">Quem Somos</h2>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+						<div class="h-80 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
+							<img src="images/quemso.png" alt="Nossa Loja" class="w-full h-full object-cover" />
+						</div>
+
+						<div>
+							<h3 class="text-2xl font-bold mb-4">Nossa Missão é o Seu Sucesso</h3>
+							<p class="mb-4">A PowerSup nasceu da paixão por fitness e nutrição esportiva. Fundada em 2015, nossa empresa tem como missão fornecer suplementos de alta qualidade que realmente fazem a diferença.</p>
+							<p class="mb-6">Acreditamos que todos merecem alcançar seus objetivos fitness, seja ganhar massa muscular, perder peso ou melhorar o desempenho.</p>
+							<a href="#" class="inline-block px-6 py-3 bg-primary text-white font-semibold rounded hover:bg-opacity-90 transition" id="saiba-mais-btn" data-page="about">Saiba Mais</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Localização -->
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+						Nossa Localização
+					</h2>
+
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+						<div>
+							<h3 class="text-2xl font-bold mb-4">Visite Nossa Loja</h3>
+							<p class="mb-4"><i class="fas fa-map-marker-alt text-primary mr-2"></i> Rua Pedro Bradão, 123 - Centro, Santana do Ipanema - AL</p>
+							<p class="mb-4"><i class="fas fa-phone text-primary mr-2"></i> (75 99134-2279) </p>
+							<p class="mb-4"><i class="fas fa-envelope text-primary mr-2"></i> contato@powersup.com</p>
+							<p class="mb-4"><i class="fas fa-clock text-primary mr-2"></i> Segunda a Sexta: 08h às 18h</p>
+							<p class="mb-6"><i class="fas fa-clock text-primary mr-2"></i> Sábado: 08h às 12h</p>
+						</div>
+
+						<div class="h-80 rounded-lg overflow-hidden shadow-lg">
+							<!-- Mapa do Google Maps -->
+							<iframe
+								src="https://maps.google.com/maps?q=santana%20do%20ipanema%20alagoas&t=&z=13&ie=UTF8&iwloc=&output=embed"
+								width="100%"
+								height="100%"
+								style="border:0;"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+							>
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Página de Produtos -->
+			<section id="products" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<div class="flex flex-col md:flex-row md:items-center mb-12">
+						<h2 class="text-3xl font-bold flex-grow">Todos os Produtos</h2>
+						<div class="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0">
+							<select id="category-filter" class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-base">
+                                <option value="all">Todas as Categorias</option>
+                                <option value="whey">Proteínas</option>
+                                <option value="pre-workout">Pré-Treinos</option>
+                                <option value="creatine">Creatina</option>
+                                <option value="thermogenic">Termogênicos</option>
+                                <option value="bcaa">Aminoácidos e BCAAs</option>
+                                <option value="hypercaloric">Hipercalóricos</option>
+                                <option value="vitamins">Vitaminas e Multivitamínicos</option>
+                                <option value="protein-bars">Pastas e Barras Proteicas</option>
+                                <option value="testo-booster">Suplementos Hormonais Testo Boosters</option>
+                                <option value="health">Saúde e Bem-estar</option>
+                                <option value="intra-workout">Repositor Energético Intra-Treino</option>
+                                <option value="accessories">Acessórios</option>
+                            </select>
+							<select id="sort-filter" class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-base">
+								<option value="name-asc">Nome (A-Z)</option>
+								<option value="name-desc">Nome (Z-A)</option>
+								<option value="price-asc">Preço (Menor-Maior)</option>
+								<option value="price-desc">Preço (Maior-Menor)</option>
+							</select>
+						</div>
+					</div>
+
+					<div id="products-grid" class="product-grid">
+						<!-- Os produtos serão carregados via JavaScript -->
+						<div class="flex justify-center items-center py-12">
+							<div class="spinner"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Página de Categoria Individual -->
+			<section id="category" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<div class="mb-8">
+						<a href="#" class="inline-flex items-center text-primary hover:underline mb-4" id="back-to-products"> <i class="fas fa-arrow-left mr-2"></i> Voltar para Produtos </a>
+						<h2 class="text-3xl font-bold" id="category-title">Categoria</h2>
+						<p class="mt-4 text-gray-600 dark:text-gray-300" id="category-description"></p>
+					</div>
+
+					<div id="category-products" class="product-grid">
+						<!-- Os produtos da categoria serão carregados via JavaScript -->
+						<div class="flex justify-center items-center py-12">
+							<div class="spinner"></div>
+						</div>
+					</div>
+                    
+                    <div class="text-center mt-8">
+                        <a href="#" data-page="products" class="inline-block px-6 py-3 bg-primary text-white font-semibold rounded hover:bg-opacity-90 transition">Ver Todos os Produtos</a>
+                    </div>
+				</div>
+			</section>
+
+			<!-- Página de Quiz -->
+			<section id="quiz" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+						Descubra os Suplementos Ideais para Você
+					</h2>
+
+					<div class="quiz-container bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 md:p-8">
+						<!-- Barra de Progresso -->
+						<div class="mb-8">
+							<div class="flex justify-between mb-2 text-sm">
+								<span>Progresso</span>
+								<span id="quiz-progress-text">0%</span>
+							</div>
+							<div class="quiz-progress-bar">
+								<div class="quiz-progress" id="quiz-progress-bar" style="width: 0%"></div>
+							</div>
+						</div>
+
+						<!-- Questões -->
+						<div id="quiz-questions">
+							<!-- Questão 1 -->
+							<div class="quiz-question active" data-question="1">
+								<h3 class="text-2xl font-bold mb-6">Qual é o seu principal objetivo fitness?</h3>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="mass">
+										<h4 class="font-bold mb-2">Ganhar Massa Muscular</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Quero aumentar minha massa muscular e força</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="definition">
+										<h4 class="font-bold mb-2">Definição Muscular</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Quero reduzir gordura e definir músculos</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="performance">
+										<h4 class="font-bold mb-2">Melhorar Performance</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Quero melhorar meu desempenho esportivo</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="health">
+										<h4 class="font-bold mb-2">Saúde e Bem-estar</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Quero suplementar minha alimentação e melhorar saúde</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Questão 2 -->
+							<div class="quiz-question" data-question="2">
+								<h3 class="text-2xl font-bold mb-6">Com qual frequência você treina?</h3>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="beginner">
+										<h4 class="font-bold mb-2">Iniciante (1-2x por semana)</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Estou começando agora ou treino com pouca frequência</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="intermediate">
+										<h4 class="font-bold mb-2">Intermediário (3-4x por semana)</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Treino regularmente há algum tempo</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="advanced">
+										<h4 class="font-bold mb-2">Avançado (5-6x por semana)</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Treino intensamente quase todos os dias</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="athlete">
+										<h4 class="font-bold mb-2">Atleta (7+ por semana)</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Faço múltiplos treinos diários ou sou atleta profissional</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Questão 3 -->
+							<div class="quiz-question" data-question="3">
+								<h3 class="text-2xl font-bold mb-6">Qual é o seu tipo de treino principal?</h3>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="weights">
+										<h4 class="font-bold mb-2">Musculação</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Foco em treinos com pesos para hipertrofia</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="functional">
+										<h4 class="font-bold mb-2">Treino Funcional/CrossFit</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Exercícios variados de alta intensidade</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="endurance">
+										<h4 class="font-bold mb-2">Endurance</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Corrida, ciclismo, natação ou triathlon</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="mixed">
+										<h4 class="font-bold mb-2">Treino Misto</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Combino vários tipos de treinamento</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Questão 4 -->
+							<div class="quiz-question" data-question="4">
+								<h3 class="text-2xl font-bold mb-6">Possui alguma restrição alimentar?</h3>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="none">
+										<h4 class="font-bold mb-2">Nenhuma Restrição</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Não tenho restrições alimentares</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="lactose">
+										<h4 class="font-bold mb-2">Intolerância à Lactose</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Preciso evitar derivados de leite com lactose</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="vegan">
+										<h4 class="font-bold mb-2">Vegetariano/Vegano</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Não consumo alguns ou todos produtos de origem animal</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="other">
+										<h4 class="font-bold mb-2">Outras Restrições</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Tenho outras restrições alimentares específicas</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Questão 5 -->
+							<div class="quiz-question" data-question="5">
+								<h3 class="text-2xl font-bold mb-6">Quais características são mais importantes para você?</h3>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="quality">
+										<h4 class="font-bold mb-2">Qualidade Premium</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Busco produtos de altíssima qualidade, independente do preço</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="value">
+										<h4 class="font-bold mb-2">Custo-Benefício</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Busco bom equilíbrio entre qualidade e preço</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="natural">
+										<h4 class="font-bold mb-2">Ingredientes Naturais</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Prefiro suplementos com ingredientes mais naturais possível</p>
+									</div>
+									<div class="quiz-option bg-gray-100 dark:bg-gray-700 p-5 rounded-lg" data-value="taste">
+										<h4 class="font-bold mb-2">Sabor e Praticidade</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm">Valorizo sabor agradável e facilidade de consumo</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Resultado -->
+							<div class="quiz-question" data-question="result">
+								<h3 class="text-2xl font-bold mb-6 text-center">Seus Suplementos Recomendados</h3>
+								<p class="text-center mb-8">Com base nas suas respostas, separamos os melhores suplementos para seus objetivos:</p>
+
+								<div id="quiz-results" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+									<!-- Os resultados serão carregados via JavaScript -->
+									<div class="flex justify-center items-center py-12 col-span-full">
+										<div class="spinner"></div>
+									</div>
+								</div>
+
+								<div class="mt-8 text-center">
+									<button id="restart-quiz" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition mx-2">
+										Refazer Quiz
+									</button>
+									<a href="#" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition mx-2 inline-block" data-page="products">
+										Ver Todos os Produtos
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Navegação do Quiz -->
+						<div class="mt-8 flex justify-between" id="quiz-navigation">
+							<button id="prev-question" class="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-400 dark:hover:bg-gray-600 transition opacity-50 cursor-not-allowed">
+								Anterior
+							</button>
+							<button id="next-question" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition">
+								Próxima
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Página de Personal Trainer -->
+			<section id="personal-trainer" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+						Serviços de Personal Trainer
+					</h2>
+
+					<!-- Banner e Vídeo de Apresentação -->
+					<div class="bg-primary bg-opacity-10 rounded-2xl p-8 mb-16">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+							<div>
+								<h3 class="text-3xl font-bold mb-4 text-primary">Transforme seu Corpo e sua Vida</h3>
+								<p class="mb-6 text-lg">
+									Nossa equipe de Personal Trainers especializados oferece acompanhamento personalizado para ajudar você a alcançar seus objetivos, seja ganho de massa, perda de peso ou melhora de performance.
+								</p>
+								<ul class="space-y-3 mb-8">
+									<li class="flex items-center"><i class="fas fa-check-circle text-primary mr-3"></i> Avaliação física completa</li>
+									<li class="flex items-center"><i class="fas fa-check-circle text-primary mr-3"></i> Planos de treino personalizados</li>
+									<li class="flex items-center"><i class="fas fa-check-circle text-primary mr-3"></i> Orientação nutricional</li>
+									<li class="flex items-center"><i class="fas fa-check-circle text-primary mr-3"></i> Acompanhamento de resultados</li>
+								</ul>
+								<a href="#personal-plans" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition inline-block">
+									Ver Planos
+								</a>
+							</div>
+							<div class="h-80 rounded-lg overflow-hidden flex items-center justify-center">
+								<img src="images/perso.jpg" alt="Personal Trainer" class="w-full h-full object-cover" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Vídeo de Apresentação -->
+					<div class="mb-16">
+						<h3 class="text-2xl font-bold text-center mb-6 relative after:content-[''] after:absolute after:w-12 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+							Conheça Nosso Trabalho
+						</h3>
+						<p class="text-center mb-8">Assista ao vídeo abaixo e conheça nosso profissionalismo e nossa metodologia de trabalho</p>
+
+						<div class="max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg">
+							<div class="aspect-w-16 aspect-h-9">
+								<iframe
+									width="100%"
+									height="500"
+									src="https://www.youtube.com/embed/sOHWcUNF5Ro"
+									title="Apresentação PowerSup Personal Trainers"
+									frameborder="0"
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+									allowfullscreen
+								>
+								</iframe>
+							</div>
+						</div>
+					</div>
+
+					<!-- Metodologia -->
+					<div class="mb-16">
+						<h3 class="text-2xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-12 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+							Nossa Metodologia
+						</h3>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-4 py-10">
+                            <!-- Avaliação Personalizada -->
+                            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2">
+                              <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center mb-4 mx-auto shadow-md transition-all duration-300 group-hover:brightness-110 group-hover:rotate-6">
+                                <i class="fas fa-user-check text-2xl text-white"></i>
+                              </div>
+                              <h4 class="text-lg font-bold text-center text-gray-800 dark:text-white mb-3">
+                                Avaliação Personalizada
+                              </h4>
+                              <p class="text-gray-700 dark:text-gray-300 text-sm text-center leading-relaxed">
+                                Antes de iniciar, realizamos uma avaliação com medidas, testes físicos e uma anamnese completa para personalizar seu plano de treino.
+                              </p>
+                            </div>
+                          
+                            <!-- Planejamento Estratégico -->
+                            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2">
+                              <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center mb-4 mx-auto shadow-md transition-all duration-300 group-hover:brightness-110 group-hover:rotate-6">
+                                <i class="fas fa-dumbbell text-2xl text-white"></i>
+                              </div>
+                              <h4 class="text-lg font-bold text-center text-gray-800 dark:text-white mb-3">
+                                Planejamento Estratégico
+                              </h4>
+                              <p class="text-gray-700 dark:text-gray-300 text-sm text-center leading-relaxed">
+                                Criamos treinos sob medida com base na sua evolução e objetivos, aplicando periodização e variações planejadas.
+                              </p>
+                            </div>
+                          
+                            <!-- Monitoramento de Progresso -->
+                            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2">
+                              <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center mb-4 mx-auto shadow-md transition-all duration-300 group-hover:brightness-110 group-hover:rotate-6">
+                                <i class="fas fa-chart-line text-2xl text-white"></i>
+                              </div>
+                              <h4 class="text-lg font-bold text-center text-gray-800 dark:text-white mb-3">
+                                Monitoramento de Progresso
+                              </h4>
+                              <p class="text-gray-700 dark:text-gray-300 text-sm text-center leading-relaxed">
+                                Acompanhamos seu progresso com avaliações frequentes, tecnologia e métricas que mostram sua evolução de forma clara.
+                              </p>
+                            </div>
+                          </div>
+                          
+
+					<!-- Planos e Preços -->
+<div id="personal-plans" class="mb-16">
+    <h3 class="text-2xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-12 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+      Planos e Preços
+    </h3>
+  
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Plano Básico -->
+      <div class="plan-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-t-4 border-primary transform hover:scale-105 hover:shadow-2xl transition-all duration-300">
+        <div class="p-6">
+          <h4 class="text-xl font-bold text-center mb-2 text-primary">Plano Básico</h4>
+          <div class="text-center mb-6">
+            <span class="text-4xl font-bold text-primary">R$ 150</span>
+            <span class="text-gray-500 dark:text-gray-400">/mês</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
+            <li class="plan-feature">1 sessão semanal (4 por mês)</li>
+            <li class="plan-feature">Avaliação física inicial</li>
+            <li class="plan-feature">Plano de treino personalizado</li>
+            <li class="plan-feature">Acompanhamento básico</li>
+            <li class="plan-feature">Acesso ao app de treinos</li>
+          </ul>
+          <button class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-opacity-90 transition contract-plan-btn" data-plan="Plano Básico" data-price="R$ 150">
+            Contratar Plano
+          </button>
+        </div>
+      </div>
+  
+      <!-- Plano Premium -->
+      <div class="plan-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-t-4 border-primary transform hover:scale-105 hover:shadow-2xl transition-all duration-300 relative z-10">
+        <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-xl">
+          Mais Popular
+        </div>
+        <div class="p-6">
+          <h4 class="text-xl font-bold text-center mb-2 text-primary">Plano Premium</h4>
+          <div class="text-center mb-6">
+            <span class="text-4xl font-bold text-primary">R$ 280</span>
+            <span class="text-gray-500 dark:text-gray-400">/mês</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
+            <li class="plan-feature">2 sessões semanais (8 por mês)</li>
+            <li class="plan-feature">Avaliação física completa</li>
+            <li class="plan-feature">Plano de treino personalizado</li>
+            <li class="plan-feature">Orientação nutricional básica</li>
+            <li class="plan-feature">Acesso ao app de treinos</li>
+            <li class="plan-feature">Suporte por WhatsApp</li>
+          </ul>
+          <button class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-opacity-90 transition contract-plan-btn" data-plan="Plano Premium" data-price="R$ 280">
+            Contratar Plano
+          </button>
+        </div>
+      </div>
+  
+      <!-- Plano Elite -->
+      <div class="plan-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden border-t-4 border-primary transform hover:scale-105 hover:shadow-2xl transition-all duration-300">
+        <div class="p-6">
+          <h4 class="text-xl font-bold text-center mb-2 text-primary">Plano Elite</h4>
+          <div class="text-center mb-6">
+            <span class="text-4xl font-bold text-primary">R$ 450</span>
+            <span class="text-gray-500 dark:text-gray-400">/mês</span>
+          </div>
+          <ul class="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
+            <li class="plan-feature">3 sessões semanais (12 por mês)</li>
+            <li class="plan-feature">Avaliação física avançada</li>
+            <li class="plan-feature">Plano de treino com periodização</li>
+            <li class="plan-feature">Consultoria nutricional completa</li>
+            <li class="plan-feature">Acesso premium ao app de treinos</li>
+            <li class="plan-feature">Suporte 24/7 por WhatsApp</li>
+            <li class="plan-feature">Acompanhamento mensal de progresso</li>
+          </ul>
+          <button class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-opacity-90 transition contract-plan-btn" data-plan="Plano Elite" data-price="R$ 450">
+            Contratar Plano
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+					<!-- Call to Action -->
+					<div class="bg-primary text-white rounded-lg p-8 text-center">
+						<h3 class="text-2xl font-bold mb-4">Pronto para Transformar seu Corpo?</h3>
+						<p class="mb-6 text-lg">Agende uma avaliação gratuita e conheça nossa metodologia sem compromisso</p>
+						<button id="schedule-evaluation" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
+							Agendar Avaliação
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- Página do Guia de Suplementos -->
+			<section id="guide" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+						Guia Completo de Suplementação
+					</h2>
+
+					<div class="max-w-4xl mx-auto">
+						<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
+							<div class="p-6">
+								<h3 class="text-2xl font-bold mb-4">Por Que Usar Suplementos?</h3>
+								<p class="mb-4">
+									Os suplementos alimentares são produtos desenvolvidos para complementar a dieta, fornecendo nutrientes que podem estar em falta ou em quantidades insuficientes no seu cardápio diário. Eles podem ajudar no
+									ganho de massa muscular, perda de gordura, melhora da performance física e recuperação pós-treino.
+								</p>
+								<p>Entretanto, é importante lembrar que suplementos não substituem uma alimentação balanceada e devem ser utilizados como um complemento à dieta, aliados a treinos regulares e descanso adequado.</p>
+							</div>
+						</div>
+
+						<!-- Acordeão de Suplementos -->
+						<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
+							<div class="border-b border-gray-200 dark:border-gray-700">
+								<button class="supplement-accordion w-full p-6 text-left font-bold text-xl flex justify-between items-center">
+									<span>Whey Protein</span>
+									<i class="fas fa-chevron-down transition-transform"></i>
+								</button>
+								<div class="supplement-panel">
+									<div class="p-6 pt-0">
+										<p class="mb-4">
+											<strong>O que é:</strong> O Whey Protein é uma proteína derivada do soro do leite, um subproduto da fabricação de queijo. É uma proteína completa que contém todos os aminoácidos essenciais.
+										</p>
+										<p class="mb-4"><strong>Para que serve:</strong> Ajuda na construção e recuperação muscular após os treinos, contribui para o ganho de massa magra e pode auxiliar na perda de gordura.</p>
+										<p class="mb-4">
+											<strong>Quando tomar:</strong> Idealmente, após o treino quando as células musculares estão mais receptivas a nutrientes. Também pode ser consumido como lanche entre as refeições ou substituindo
+											uma refeição.
+										</p>
+										<p class="mb-4"><strong>Tipos principais:</strong></p>
+										<ul class="list-disc pl-6 mb-4">
+											<li><strong>Whey Concentrate:</strong> Forma menos processada, com maior quantidade de lactose e gordura.</li>
+											<li><strong>Whey Isolate:</strong> Forma mais pura, com menos lactose e gordura, ideal para quem tem intolerância.</li>
+											<li><strong>Whey Hydrolysate:</strong> Forma pré-digerida, de absorção mais rápida.</li>
+										</ul>
+										<p><strong>Dosagem recomendada:</strong> Geralmente entre 20-30g por porção, 1-3 vezes ao dia, dependendo das necessidades individuais.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="border-b border-gray-200 dark:border-gray-700">
+								<button class="supplement-accordion w-full p-6 text-left font-bold text-xl flex justify-between items-center">
+									<span>Creatina</span>
+									<i class="fas fa-chevron-down transition-transform"></i>
+								</button>
+								<div class="supplement-panel">
+									<div class="p-6 pt-0">
+										<p class="mb-4"><strong>O que é:</strong> A creatina é um composto nitrogenado naturalmente produzido pelo corpo e encontrado em carnes vermelhas e peixes.</p>
+										<p class="mb-4">
+											<strong>Para que serve:</strong> Aumenta a produção de ATP (energia) nos músculos, melhorando a força, potência e resistência durante treinos de alta intensidade. Também contribui para o aumento
+											de massa muscular.
+										</p>
+										<p class="mb-4"><strong>Quando tomar:</strong> Pode ser tomada a qualquer momento do dia, mas muitos preferem tomá-la após o treino junto com carboidratos para melhor absorção.</p>
+										<p class="mb-4"><strong>Tipos principais:</strong></p>
+										<ul class="list-disc pl-6 mb-4">
+											<li><strong>Creatina Monohidratada:</strong> A forma mais estudada, eficaz e segura.</li>
+											<li><strong>Creatina HCL:</strong> Forma ligada ao ácido clorídrico, supostamente com melhor absorção.</li>
+											<li><strong>Creatina Kre-Alkalyn:</strong> Forma tamponada que promete menos efeitos colaterais.</li>
+										</ul>
+										<p><strong>Dosagem recomendada:</strong> 3-5g por dia. Alguns fazem uma fase de saturação com 20g/dia por 5-7 dias, mas não é obrigatório.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="border-b border-gray-200 dark:border-gray-700">
+								<button class="supplement-accordion w-full p-6 text-left font-bold text-xl flex justify-between items-center">
+									<span>Pré-Treino</span>
+									<i class="fas fa-chevron-down transition-transform"></i>
+								</button>
+								<div class="supplement-panel">
+									<div class="p-6 pt-0">
+										<p class="mb-4"><strong>O que é:</strong> Suplementos pré-treino são fórmulas que combinam diversos ingredientes para melhorar o desempenho durante o exercício.</p>
+										<p class="mb-4"><strong>Para que serve:</strong> Aumenta a energia, foco, concentração, fluxo sanguíneo (pump) e resistência durante o treino.</p>
+										<p class="mb-4"><strong>Quando tomar:</strong> 15-30 minutos antes do treino.</p>
+										<p class="mb-4"><strong>Ingredientes comuns:</strong></p>
+										<ul class="list-disc pl-6 mb-4">
+											<li><strong>Cafeína:</strong> Estimulante que aumenta energia e foco.</li>
+											<li><strong>Beta-Alanina:</strong> Reduz a fadiga muscular e aumenta a resistência.</li>
+											<li><strong>Citrulina Malato:</strong> Melhora o fluxo sanguíneo e reduz a fadiga.</li>
+											<li><strong>Arginina:</strong> Precursor do óxido nítrico, melhora o fluxo sanguíneo.</li>
+											<li><strong>Taurina:</strong> Ajuda na função celular e na hidratação.</li>
+										</ul>
+										<p><strong>Observações:</strong> Pessoas sensíveis à cafeína devem ter cuidado com pré-treinos e evitar o consumo à noite. Tolerância pode ser desenvolvida com o uso constante.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="border-b border-gray-200 dark:border-gray-700">
+								<button class="supplement-accordion w-full p-6 text-left font-bold text-xl flex justify-between items-center">
+									<span>BCAA</span>
+									<i class="fas fa-chevron-down transition-transform"></i>
+								</button>
+								<div class="supplement-panel">
+									<div class="p-6 pt-0">
+										<p class="mb-4"><strong>O que é:</strong> BCAAs (Branched Chain Amino Acids) são aminoácidos de cadeia ramificada: leucina, isoleucina e valina.</p>
+										<p class="mb-4"><strong>Para que serve:</strong> Ajudam na síntese proteica, reduzem o catabolismo muscular, diminuem a fadiga durante o exercício e podem acelerar a recuperação.</p>
+										<p class="mb-4"><strong>Quando tomar:</strong> Antes, durante ou após o treino. Também pode ser consumido entre as refeições.</p>
+										<p class="mb-4"><strong>Proporções comuns:</strong></p>
+										<ul class="list-disc pl-6 mb-4">
+											<li><strong>2:1:1:</strong> A proporção clássica (leucina:isoleucina:valina).</li>
+											<li><strong>4:1:1:</strong> Proporção com ênfase na leucina, que é o aminoácido mais importante para a síntese proteica.</li>
+											<li><strong>8:1:1:</strong> Proporção ainda mais focada na leucina.</li>
+										</ul>
+										<p><strong>Observações:</strong> Para quem consome proteína suficiente na dieta ou whey protein, o benefício adicional dos BCAAs pode ser limitado, já que estas fontes já contêm BCAAs.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="border-b border-gray-200 dark:border-gray-700">
+								<button class="supplement-accordion w-full p-6 text-left font-bold text-xl flex justify-between items-center">
+									<span>Termogênicos</span>
+									<i class="fas fa-chevron-down transition-transform"></i>
+								</button>
+								<div class="supplement-panel">
+									<div class="p-6 pt-0">
+										<p class="mb-4"><strong>O que é:</strong> Suplementos que aumentam a temperatura corporal e a taxa metabólica, auxiliando na queima de gordura.</p>
+										<p class="mb-4"><strong>Para que serve:</strong> Aumento do gasto calórico, redução do apetite, aumento da energia e melhora do foco durante exercícios.</p>
+										<p class="mb-4"><strong>Quando tomar:</strong> Geralmente pela manhã ou 30 minutos antes do treino. Evite consumir à noite para não afetar o sono.</p>
+										<p class="mb-4"><strong>Ingredientes comuns:</strong></p>
+										<ul class="list-disc pl-6 mb-4">
+											<li><strong>Cafeína:</strong> Estimula o sistema nervoso central, aumentando o metabolismo.</li>
+											<li><strong>Chá Verde:</strong> Contém EGCG que pode aumentar a oxidação de gordura.</li>
+											<li><strong>Pimenta Caiena:</strong> Contém capsaicina que pode elevar a temperatura corporal.</li>
+											<li><strong>L-Carnitina:</strong> Transporta ácidos graxos para serem queimados como energia.</li>
+											<li><strong>Forskolina:</strong> Pode ajudar a aumentar os níveis de AMP cíclico, importante para queima de gordura.</li>
+										</ul>
+										<p>
+											<strong>Observações:</strong> Pessoas com pressão alta, problemas cardíacos, ansiedade ou sensibilidade à cafeína devem ter cuidado ou evitar termogênicos. Não são recomendados para uso constante
+											e prolongado.
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="border-b border-gray-200 dark:border-gray-700">
+								<button class="supplement-accordion w-full p-6 text-left font-bold text-xl flex justify-between items-center">
+									<span>Outros Suplementos</span>
+									<i class="fas fa-chevron-down transition-transform"></i>
+								</button>
+								<div class="supplement-panel">
+									<div class="p-6 pt-0">
+										<h4 class="font-bold mb-3">Hipercalóricos</h4>
+										<p class="mb-3">Suplementos ricos em calorias, carboidratos e proteínas, para pessoas que têm dificuldade em ganhar peso ou precisam de um aporte calórico maior.</p>
+										
+										<h4 class="font-bold mb-3 mt-5">Vitaminas e Minerais</h4>
+										<p class="mb-3">Micronutrientes essenciais para diversas funções do organismo, incluindo produção de energia, suporte ao sistema imunológico e recuperação muscular.</p>
+										
+										<h4 class="font-bold mb-3 mt-5">Barras Proteicas</h4>
+										<p class="mb-3">Lanches práticos e portáteis ricos em proteínas, ideais para consumo entre refeições quando não há acesso a uma refeição completa.</p>
+										
+										<h4 class="font-bold mb-3 mt-5">Glutamina</h4>
+										<p>Aminoácido que auxilia na recuperação muscular, saúde intestinal e função imunológica, especialmente útil em períodos de treino intenso.</p>
+                                        
+                                        <h4 class="font-bold mb-3 mt-5">Acessórios para Musculação</h4>
+										<p>Itens como cintos, luvas, straps e joelheiras que ajudam a melhorar a técnica, aumentar a segurança e potencializar o desempenho durante os treinos de força.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Considerações Finais -->
+						<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
+							<div class="p-6">
+								<h3 class="text-2xl font-bold mb-4">Considerações Importantes</h3>
+								<ul class="list-disc pl-6">
+									<li class="mb-2">Consulte um profissional de saúde antes de iniciar qualquer suplementação, especialmente se você tem condições médicas pré-existentes.</li>
+									<li class="mb-2">Suplementos não substituem uma alimentação balanceada e hábitos saudáveis.</li>
+									<li class="mb-2">Os resultados variam de pessoa para pessoa e dependem de diversos fatores como genética, treino e alimentação.</li>
+									<li class="mb-2">Leia atentamente os rótulos e respeite as dosagens recomendadas.</li>
+									<li class="mb-2">Identifique seus objetivos específicos para escolher os suplementos mais adequados.</li>
+									<li>Verifique a procedência e qualidade dos produtos, dando preferência a marcas reconhecidas.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Página Quem Somos -->
+			<section id="about" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">Quem Somos</h2>
+
+					<div class="max-w-4xl mx-auto">
+						<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-12">
+							<div class="h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+								<img src="images/qem.jpg" alt="Nossa Loja" class="w-full h-full object-cover" />
+							</div>
+							<div class="p-6">
+								<h3 class="text-2xl font-bold mb-4">Nossa História</h3>
+								<p class="mb-4">
+									A PowerSup nasceu da paixão por fitness e nutrição esportiva em Santana do Ipanema, Alagoas. Fundada em 2015 por um grupo de entusiastas do fitness, nossa empresa começou como uma pequena loja
+									especializada em Santana do Ipanema e cresceu para se tornar uma referência na região.
+								</p>
+								<p class="mb-4">
+									Nossa jornada começou quando percebemos a dificuldade dos atletas e praticantes de atividades físicas locais em encontrar suplementos de qualidade sem precisar recorrer a grandes centros. Decidimos então
+									criar um espaço onde as pessoas pudessem encontrar produtos premium, com orientação adequada e preços justos.
+								</p>
+								<p>
+									Ao longo dos anos, expandimos nosso catálogo, sempre mantendo o compromisso com a qualidade e a satisfação dos clientes. Hoje, a PowerSup é orgulhosamente reconhecida como a principal fornecedora de
+									suplementos esportivos de Santana do Ipanema e região.
+								</p>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+							<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden h-full">
+								<div class="p-6">
+									<h3 class="text-2xl font-bold mb-4">Nossa Missão</h3>
+									<p>
+										Fornecer suplementos de alta qualidade e informação confiável, ajudando nossos clientes a alcançarem seus objetivos fitness com saúde e bem-estar, sempre com atendimento personalizado e compromisso
+										com a satisfação.
+									</p>
+								</div>
+							</div>
+
+							<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden h-full">
+								<div class="p-6">
+									<h3 class="text-2xl font-bold mb-4">Nossa Visão</h3>
+									<p>Ser a principal referência em suplementação esportiva no interior de Alagoas, reconhecida pela excelência dos produtos, atendimento diferenciado e compromisso com o progresso de nossos clientes.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+							<div class="p-6">
+								<h3 class="text-2xl font-bold mb-4">Nossa Equipe</h3>
+								<p class="mb-6">A PowerSup conta com uma equipe de profissionais apaixonados por fitness e nutrição, sempre prontos para oferecer o melhor atendimento e orientação.</p>
+
+								<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+									<div class="text-center">
+										<div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden">
+											<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Carlos Silva" class="w-full h-full object-cover" />
+										</div>
+										<h4 class="font-bold">Carlos Silva</h4>
+										<p class="text-sm text-gray-600 dark:text-gray-300">Fundador e CEO</p>
+									</div>
+
+									<div class="text-center">
+										<div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden">
+											<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Ana Costa" class="w-full h-full object-cover" />
+										</div>
+										<h4 class="font-bold">Ana Costa</h4>
+										<p class="text-sm text-gray-600 dark:text-gray-300">Atendente</p>
+									</div>
+
+									<div class="text-center">
+										<div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden">
+											<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Rafael Oliveira" class="w-full h-full object-cover" />
+										</div>
+										<h4 class="font-bold">Rafael Oliveira</h4>
+										<p class="text-sm text-gray-600 dark:text-gray-300">Vendedor</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Página de Contato -->
+			<section id="contact" class="page">
+				<div class="container mx-auto px-4 py-16">
+					<h2 class="text-3xl font-bold text-center mb-12 relative after:content-[''] after:absolute after:w-16 after:h-1 after:bg-primary after:bottom-[-10px] after:left-1/2 after:transform after:-translate-x-1/2">
+						Entre em Contato
+					</h2>
+
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+						<div>
+							<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
+								<div class="p-6">
+									<h3 class="text-2xl font-bold mb-6">Informações de Contato</h3>
+
+									<div class="flex items-start mb-6">
+										<div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+											<i class="fas fa-map-marker-alt text-primary"></i>
+										</div>
+										<div>
+											<h4 class="font-bold mb-1">Endereço</h4>
+											<p>Rua Pedro Brandão, 123 - Centro, Santana do Ipanema - AL, 57500-000</p>
+										</div>
+									</div>
+
+									<div class="flex items-start mb-6">
+										<div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+											<i class="fas fa-phone text-primary"></i>
+										</div>
+										<div>
+											<h4 class="font-bold mb-1">Telefone</h4>
+											<p>(75) 99134-2279</p>
+										</div>
+									</div>
+
+									<div class="flex items-start mb-6">
+										<div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+											<i class="fas fa-envelope text-primary"></i>
+										</div>
+										<div>
+											<h4 class="font-bold mb-1">E-mail</h4>
+											<p>contato@powersup.com</p>
+										</div>
+									</div>
+
+									<div class="flex items-start">
+										<div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+											<i class="fas fa-clock text-primary"></i>
+										</div>
+										<div>
+											<h4 class="font-bold mb-1">Horário de Funcionamento</h4>
+											<p>Segunda a Sexta: 08h às 18h</p>
+											<p>Sábado: 08h às 12h</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+								<div class="h-64 rounded-lg overflow-hidden">
+									<iframe
+										src="https://maps.google.com/maps?q=santana%20do%20ipanema%20alagoas&t=&z=13&ie=UTF8&iwloc=&output=embed"
+										width="100%"
+										height="100%"
+										style="border:0;"
+										allowfullscreen=""
+										loading="lazy"
+										referrerpolicy="no-referrer-when-downgrade"
+									>
+									</iframe>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+								<div class="p-6">
+									<h3 class="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
+
+									<form id="contact-form">
+										<div class="mb-4">
+											<label for="name" class="block font-medium mb-2">Nome Completo</label>
+											<input
+												type="text"
+												id="name"
+												class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base"
+												required
+											/>
+										</div>
+
+										<div class="mb-4">
+											<label for="email" class="block font-medium mb-2">E-mail</label>
+											<input
+												type="email"
+												id="email"
+												class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base"
+												required
+											/>
+										</div>
+
+										<div class="mb-4">
+											<label for="phone" class="block font-medium mb-2">Telefone</label>
+											<input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" />
+										</div>
+
+										<div class="mb-4">
+											<label for="subject" class="block font-medium mb-2">Assunto</label>
+											<select id="subject" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base">
+												<option value="">Selecione</option>
+												<option value="info">Informações sobre Produtos</option>
+												<option value="order">Pedidos</option>
+												<option value="support">Suporte</option>
+												<option value="partnership">Parcerias</option>
+												<option value="other">Outro</option>
+											</select>
+										</div>
+
+										<div class="mb-6">
+											<label for="message" class="block font-medium mb-2">Mensagem</label>
+											<textarea
+												id="message"
+												rows="5"
+												class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base"
+												required
+											></textarea>
+										</div>
+
+										<button type="button" id="send-message-btn" class="w-full bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-90 transition">Enviar Mensagem</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Rodapé -->
+<footer class="bg-secondary text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+  
+        <!-- Logo e Redes Sociais -->
+        <div class="text-center md:text-left">
+          <a href="#" class="flex justify-center md:justify-start items-center text-2xl font-extrabold mb-6">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
+              <i class="fas fa-dumbbell text-white"></i>
+            </div>
+            POWER<span class="text-primary">SUP</span>
+          </a>
+          <p class="mb-6 text-gray-400">Oferecendo os melhores suplementos esportivos para maximizar seus resultados fitness desde 2015.</p>
+          <div class="flex justify-center md:justify-start space-x-4">
+            <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center hover:bg-primary transition">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+  
+        <!-- Links Rápidos -->
+        <div class="text-center md:text-left">
+          <h4 class="text-lg font-bold mb-6">Links Rápidos</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="home">Home</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="products">Produtos</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="personal-trainer">Personal Trainer</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="quiz">Quiz de Suplementos</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="guide">Guia de Suplementação</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="about">Quem Somos</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-page="contact">Contato</a></li>
+          </ul>
+        </div>
+  
+        <!-- Categorias -->
+        <div class="text-center md:text-left">
+          <h4 class="text-lg font-bold mb-6">Categorias</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="whey">Whey Protein</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="pre-workout">Pré-Treino</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="creatine">Creatina</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="thermogenic">Termogênicos</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="bcaa">BCAA</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="hypercaloric">Hipercalóricos</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="vitamins">Vitaminas</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="testo-booster">Testo Boosters</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="health">Saúde e Bem-estar</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="intra-workout">Intra-Treino</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition" data-category="accessories">Acessórios</a></li>
+          </ul>
+        </div>
+  
+        <!-- Contato -->
+        <div class="text-center md:text-left">
+          <h4 class="text-lg font-bold mb-6">Contato</h4>
+          <ul class="space-y-4">
+            <li class="flex flex-col items-center md:flex-row md:items-start">
+              <i class="fas fa-map-marker-alt text-primary mt-1 md:mr-3 mb-1 md:mb-0"></i>
+              <span>Rua Pedro Brandão 123 - Centro, Santana do Ipanema - AL, 57500-000</span>
+            </li>
+            <li class="flex items-center justify-center md:justify-start">
+              <i class="fas fa-phone text-primary mr-3"></i>
+              <span>(75) 99134-2279</span>
+            </li>
+            <li class="flex items-center justify-center md:justify-start">
+              <i class="fas fa-envelope text-primary mr-3"></i>
+              <span>contato@powersup.com</span>
+            </li>
+            <li class="flex items-center justify-center md:justify-start">
+              <i class="fas fa-clock text-primary mr-3"></i>
+              <span>Seg-Sex: 08h-18h, Sáb: 08h-12h</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Footer Bottom -->
+      <div class="footer-bottom text-center py-4">
+        <div class="footer-bottom-content text-sm text-white space-y-1">
+          <p>&copy; 2025 PowerNutri. Todos os direitos reservados.</p>
+          <p class="developer-credit flex items-center justify-center gap-1">
+            <i class="fas fa-code text-primary"></i> Desenvolvido por 
+            <a href="https://wa.me/5575991342279" target="_blank" class="text-primary hover:underline flex items-center gap-1">
+              PeagahTech <i class="fas fa-external-link-alt text-xs"></i>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+
+		<!-- Modal de Produto -->
+		<div id="product-modal" class="fixed inset-0 z-50 hidden">
+			<div class="absolute inset-0 bg-black bg-opacity-50" id="modal-overlay"></div>
+			<div class="relative z-10 w-11/12 max-w-3xl mx-auto mt-10 sm:mt-20 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+				<button class="absolute top-2 right-2 z-10 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl" id="close-modal">
+					<i class="fas fa-times"></i>
+				</button>
+
+				<div class="grid grid-cols-1 md:grid-cols-2">
+					<div class="p-3 sm:p-4 flex items-center justify-center bg-gray-100 dark:bg-gray-700">
+						<div id="modal-product-image" class="text-center w-full h-48 sm:h-56 md:h-64 flex items-center justify-center">
+							<!-- Imagem do produto será carregada via JavaScript -->
+						</div>
+					</div>
+
+					<div class="p-3 sm:p-4">
+						<h3 id="modal-product-name" class="text-xl sm:text-2xl font-bold mb-1"></h3>
+						<div id="modal-product-category" class="inline-block bg-primary bg-opacity-10 text-primary px-2 py-0.5 rounded-full text-xs font-medium mb-2"></div>
+
+						<div id="modal-product-rating" class="flex text-yellow-400 mb-2 text-sm"></div>
+
+						<p id="modal-product-description" class="text-sm text-gray-600 dark:text-gray-300 mb-3"></p>
+
+						<div class="mb-3">
+							<h4 class="font-bold mb-1 text-sm">Principais Benefícios:</h4>
+							<ul id="modal-product-benefits" class="list-disc pl-5 text-xs text-gray-600 dark:text-gray-300"></ul>
+						</div>
+
+						<div class="flex items-center justify-between mb-3">
+							<div>
+								<span class="text-gray-500 dark:text-gray-400 text-xs line-through" id="modal-product-old-price"></span>
+								<div class="text-xl sm:text-2xl font-bold text-primary" id="modal-product-price"></div>
+								<div class="text-xs text-gray-500 dark:text-gray-400" id="modal-product-installments"></div>
+							</div>
+
+							<div class="flex items-center">
+								<button class="w-7 h-7 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-l-lg" id="decrease-quantity">
+									<i class="fas fa-minus text-xs"></i>
+								</button>
+								<input type="number" id="product-quantity" class="w-10 h-7 border-t border-b border-gray-300 dark:border-gray-600 text-center text-sm" value="1" min="1" />
+								<button class="w-7 h-7 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-r-lg" id="increase-quantity">
+									<i class="fas fa-plus text-xs"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-2 gap-2">
+							<button id="modal-add-to-cart" class="bg-primary text-white font-semibold py-2 px-3 rounded-lg hover:bg-opacity-90 transition flex items-center justify-center text-sm">
+								<i class="fas fa-shopping-cart mr-1"></i> Adicionar
+							</button>
+							<button id="modal-buy-now" class="bg-green-600 text-white font-semibold py-2 px-3 rounded-lg hover:bg-opacity-90 transition text-sm">
+								Comprar Agora
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Carrinho Lateral -->
+		<div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-gray-800 z-50 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
+			<div class="h-full flex flex-col">
+				<div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+					<h3 class="text-xl font-bold">Seu Carrinho</h3>
+					<button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+						<i class="fas fa-times"></i>
+					</button>
+				</div>
+
+				<div id="cart-items" class="flex-grow overflow-y-auto p-4">
+					<!-- Os itens do carrinho serão carregados via JavaScript -->
+					<div class="text-center py-8 text-gray-500 dark:text-gray-400">
+						<i class="fas fa-shopping-cart text-4xl mb-4"></i>
+						<p>Seu carrinho está vazio</p>
+					</div>
+				</div>
+
+				<!-- Formulário de endereço e pagamento -->
+				<div id="checkout-form" class="p-4 border-t border-gray-200 dark:border-gray-700 hidden">
+					<h3 class="font-bold text-lg mb-4">Informações de Entrega</h3>
+					<div class="space-y-3 mb-4">
+						<div>
+							<label for="customer-name" class="block text-sm font-medium mb-1">Nome Completo</label>
+							<input type="text" id="customer-name" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+						</div>
+						<div>
+							<label for="customer-address" class="block text-sm font-medium mb-1">Endereço</label>
+							<input type="text" id="customer-address" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+						</div>
+						<div class="grid grid-cols-2 gap-2">
+							<div>
+								<label for="customer-number" class="block text-sm font-medium mb-1">Número</label>
+								<input type="text" id="customer-number" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+							</div>
+							<div>
+								<label for="customer-complement" class="block text-sm font-medium mb-1">Complemento</label>
+								<input type="text" id="customer-complement" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" />
+							</div>
+						</div>
+						<div>
+							<label for="customer-neighborhood" class="block text-sm font-medium mb-1">Bairro</label>
+							<input type="text" id="customer-neighborhood" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+						</div>
+						<div class="grid grid-cols-2 gap-2">
+							<div>
+								<label for="customer-city" class="block text-sm font-medium mb-1">Cidade</label>
+								<input type="text" id="customer-city" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+							</div>
+							<div>
+								<label for="customer-state" class="block text-sm font-medium mb-1">Estado</label>
+								<select id="customer-state" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required>
+									<option value="">Selecione</option>
+									<option value="AC">AC</option>
+									<option value="AL">AL</option>
+									<option value="AP">AP</option>
+									<option value="AM">AM</option>
+									<option value="BA">BA</option>
+									<option value="CE">CE</option>
+									<option value="DF">DF</option>
+									<option value="ES">ES</option>
+									<option value="GO">GO</option>
+									<option value="MA">MA</option>
+									<option value="MT">MT</option>
+									<option value="MS">MS</option>
+									<option value="MG">MG</option>
+									<option value="PA">PA</option>
+									<option value="PB">PB</option>
+									<option value="PR">PR</option>
+									<option value="PE">PE</option>
+									<option value="PI">PI</option>
+									<option value="RJ">RJ</option>
+									<option value="RN">RN</option>
+									<option value="RS">RS</option>
+									<option value="RO">RO</option>
+									<option value="RR">RR</option>
+									<option value="SC">SC</option>
+									<option value="SP">SP</option>
+									<option value="SE">SE</option>
+									<option value="TO">TO</option>
+								</select>
+							</div>
+						</div>
+						<div>
+							<label for="customer-cep" class="block text-sm font-medium mb-1">CEP</label>
+							<input type="text" id="customer-cep" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+						</div>
+						<div>
+							<label for="customer-phone" class="block text-sm font-medium mb-1">Telefone</label>
+							<input type="tel" id="customer-phone" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 text-base" required />
+						</div>
+					</div>
+
+					<h3 class="font-bold text-lg mb-4">Forma de Pagamento</h3>
+					<div class="space-y-3 mb-6">
+						<div class="flex items-center space-x-3">
+							<input type="radio" id="payment-method-pix" name="payment-method" value="pix" checked class="focus:ring-primary h-4 w-4 text-primary" />
+							<label for="payment-method-pix" class="flex items-center">
+								<i class="fas fa-qrcode mr-2 text-primary"></i>
+								<span>PIX</span>
+							</label>
+						</div>
+						<div class="flex items-center space-x-3">
+							<input type="radio" id="payment-method-credit" name="payment-method" value="credit" class="focus:ring-primary h-4 w-4 text-primary" />
+							<label for="payment-method-credit" class="flex items-center">
+								<i class="far fa-credit-card mr-2 text-primary"></i>
+								<span>Cartão de Crédito</span>
+							</label>
+						</div>
+						<div class="flex items-center space-x-3">
+							<input type="radio" id="payment-method-cash" name="payment-method" value="cash" class="focus:ring-primary h-4 w-4 text-primary" />
+							<label for="payment-method-cash" class="flex items-center">
+								<i class="fas fa-money-bill-wave mr-2 text-primary"></i>
+								<span>Dinheiro (na entrega)</span>
+							</label>
+						</div>
+					</div>
+
+					<button id="back-to-cart" class="w-full bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-white font-semibold py-2 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-600 transition mb-3">
+						Voltar ao Carrinho
+					</button>
+					<button id="finish-order" class="w-full bg-green-600 text-white font-semibold py-2 rounded-lg hover:bg-green-700 transition">
+						Finalizar Compra
+					</button>
+				</div>
+
+				<div id="cart-summary" class="p-4 border-t border-gray-200 dark:border-gray-700">
+					<div class="flex justify-between mb-4">
+						<span class="font-bold">Subtotal:</span>
+						<span id="cart-subtotal" class="font-bold">R$ 0,00</span>
+					</div>
+
+					<button id="proceed-checkout" class="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:bg-opacity-90 transition mb-3 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+						Prosseguir para Entrega
+					</button>
+
+					<button id="continue-shopping" class="w-full bg-transparent border border-primary text-primary font-semibold py-3 rounded-lg hover:bg-primary hover:bg-opacity-10 transition">
+						Continuar Comprando
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Mensagem de Alerta -->
+		<div id="alert-message" class="fixed bottom-4 right-4 max-w-md bg-green-500 text-white p-4 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300 z-50 flex items-center">
+			<i class="fas fa-check-circle mr-3 text-xl"></i>
+			<span id="alert-text">Item adicionado ao carrinho!</span>
+		</div>
+
+		<!-- WhatsApp Flutuante -->
+		<a href="https://wa.me/5575991342279" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-green-600 transition z-40">
+			<i class="fab fa-whatsapp"></i>
+		</a>
+    </body>    
+        
+        <script>
+            // *** Banco de Dados Simulado ***
+const productsDB = [
+    // Proteínas
+    {
+        id: 1,
+        name: "Whey Protein Isolado - Dymatize",
+        category: "whey",
+        categoryName: "Proteínas",
+        price: 199.90,
+        oldPrice: 229.90,
+        rating: 4.5,
+        image: "whey-iso",
+        imageUrl: "images/whey-iso.png",
+        icon: "fas fa-dumbbell",
+        tag: "Mais Vendido",
+        description: "Fórmula de alta qualidade para ganho de massa muscular, com 24g de proteína por dose e baixo teor de gordura e carboidratos.",
+        benefits: [
+            "24g de proteína por dose",
+            "Baixo teor de gordura e carboidratos",
+            "Alta concentração de BCAAs",
+            "Rápida absorção",
+            "Sabor premium"
+        ]
+    },
+    {
+        id: 2,
+        name: "100% Whey - Max Titanium",
+        category: "whey",
+        categoryName: "Proteínas",
+        price: 249.90,
+        oldPrice: 279.90,
+        rating: 5,
+        image: "whey2",
+        imageUrl: "images/whey2.png",
+        icon: "fas fa-dumbbell",
+        tag: "Premium",
+        description: "Whey protein isolado com 27g de proteína por dose, virtualmente livre de lactose e gordura, ideal para definição muscular.",
+        benefits: [
+            "27g de proteína por dose",
+            "Menos de 1g de gordura e carboidrato",
+            "Praticamente sem lactose",
+            "90% de proteína pura",
+            "Ideal para fase de definição"
+        ]
+    },
+    {
+        id: 3,
+        name: "Whey Protein Isolado - Integralmédica",
+        category: "whey",
+        categoryName: "Proteínas",
+        price: 289.90,
+        oldPrice: 329.90,
+        rating: 4.8,
+        image: "whey3",
+        imageUrl: "images/whey-iso2.png",
+        icon: "fas fa-dumbbell",
+        tag: "Absorção Rápida",
+        description: "Proteína pré-digerida de altíssima absorção, ideal para recuperação imediata pós-treino e ganho de massa magra.",
+        benefits: [
+            "30g de proteína por dose",
+            "Pré-digerida para absorção instantânea",
+            "Peptídeos de cadeia curta",
+            "Mínima quantidade de gordura e lactose",
+            "Ideal para períodos de definição"
+        ]
+    },
+    // Pré-Treino
+    {
+        id: 4,
+        name: "Pré-Treino Haze - Growth",
+        category: "pre-workout",
+        categoryName: "Pré-Treinos",
+        price: 129.90,
+        oldPrice: 149.90,
+        rating: 4,
+        image: "pre",
+        imageUrl: "images/pre.png",
+        icon: "fas fa-bolt",
+        tag: "Energia Máxima",
+        description: "Fórmula completa para máxima energia, foco e pump durante os treinos, com 300mg de cafeína por dose.",
+        benefits: [
+            "300mg de cafeína por dose",
+            "Beta-alanina para resistência",
+            "L-citrulina para pump muscular",
+            "Taurina para foco mental",
+            "Vitaminas do complexo B"
+        ]
+    },
+    {
+        id: 5,
+        name: "Pré-Treino C4 - Cellucor",
+        category: "pre-workout",
+        categoryName: "Pré-Treinos",
+        price: 149.90,
+        oldPrice: 169.90,
+        rating: 4.7,
+        image: "pre2",
+        imageUrl: "images/c4-cellucor.png",
+        icon: "fas fa-bolt",
+        tag: "Pump Máximo",
+        description: "Fórmula concentrada para maximizar o bombeamento muscular e vasodilatação, com alta dose de citrulina e arginina.",
+        benefits: [
+            "8g de citrulina malato por dose",
+            "Arginina AAKG para vasodilatação",
+            "Glicerol para super-hidratação muscular",
+            "Betaína para potência muscular",
+            "Sem estimulantes - ideal para treinos noturnos"
+        ]
+    },
+    {
+        id: 6,
+        name: "Pré-Treino - Crazyness",
+        category: "pre-workout",
+        categoryName: "Pré-Treinos",
+        price: 119.90,
+        oldPrice: 139.90,
+        rating: 4.5,
+        image: "pree",
+        imageUrl: "images/pree.png",
+        icon: "fas fa-bolt",
+        tag: "Foco Mental",
+        description: "Pré-treino especializado para foco mental e energia sustentada, com nootropics e estimulantes naturais.",
+        benefits: [
+            "Blend de estimulantes (cafeína, teacrina, tirosina)",
+            "Nootropics para foco mental",
+            "L-teanina para concentração sem ansiedade",
+            "Sem beta-alanina (sem formigamento)",
+            "Energia sustentada por até 4 horas"
+        ]
+    },
+    // Creatina
+    {
+        id: 7,
+        name: "Creatina - Probiótica",
+        category: "creatine",
+        categoryName: "Creatina",
+        price: 119.90,
+        oldPrice: 139.90,
+        rating: 4.6,
+        image: "creatina-1",
+        imageUrl: "images/creatina-1.png",
+        icon: "fas fa-pills",
+        tag: "Absorção Superior",
+        description: "Creatina HCL (hidroclórica) com absorção superior à monohidratada, sem causar retenção de água subcutânea.",
+        benefits: [
+            "1,5g por dose - equivalente a 5g de monohidratada",
+            "Sem retenção hídrica subcutânea",
+            "Não necessita fase de saturação",
+            "Sem desconforto gastrointestinal",
+            "Ideal para fases de definição"
+        ]
+    },
+    {
+        id: 8,
+        name: "Creatina Hardcore - Integralmédica",
+        category: "creatine",
+        categoryName: "Creatina",
+        price: 99.90,
+        oldPrice: 119.90,
+        rating: 4.3,
+        image: "creatina-int",
+        imageUrl: "images/creatina-int.png",
+        icon: "fas fa-pills",
+        tag: "pH Estabilizado",
+        description: "Creatina tamponada (Kre-Alkalyn) que evita a conversão em creatinina no estômago, otimizando a absorção.",
+        benefits: [
+            "1,5g por dose - equivalente a 5g de monohidratada",
+            "pH estabilizado para evitar degradação no estômago",
+            "Melhor biodisponibilidade",
+            "Sem retenção hídrica ou inchaço",
+            "Ideal para pessoas sensíveis à creatina convencional"
+        ]
+    },
+    // Termogênicos
+    {
+        id: 9,
+        name: "Termogênico Black Burn - AGE",
+        category: "thermogenic",
+        categoryName: "Termogênicos",
+        price: 119.90,
+        oldPrice: 139.90,
+        rating: 4,
+        image: "thermogênico",
+        imageUrl: "images/termogênico.png",
+        icon: "fas fa-fire",
+        tag: "Máxima Queima",
+        description: "Potente termogênico para aceleração do metabolismo, queima de gordura e aumento da energia.",
+        benefits: [
+            "220mg de cafeína por cápsula",
+            "Chá verde e chá branco",
+            "Pimenta caiena",
+            "L-carnitina",
+            "Sem efedrina"
+        ]
+    },
+    {
+        id: 10,
+        name: "Termogênico Black Burn - BioTech",
+        category: "thermogenic",
+        categoryName: "Termogênicos",
+        price: 109.90,
+        oldPrice: 129.90,
+        rating: 4.2,
+        image: "termo",
+        imageUrl: "images/termo.png",
+        icon: "fas fa-fire",
+        tag: "Noturno",
+        description: "Termogênico sem estimulantes para uso noturno, aumentando a queima de gordura durante o sono.",
+        benefits: [
+            "Sem cafeína ou estimulantes",
+            "L-carnitina e colina para mobilização de gordura",
+            "Tirosina e 5-HTP para controle do apetite noturno",
+            "GABA para melhora do sono",
+            "Magnésio e zinco para suporte hormonal"
+        ]
+    },
+    
+    // BCAA
+    {
+        id: 11,
+        name: "BCAA 2400 - BlackSkull",
+        category: "bcaa",
+        categoryName: "Aminoácidos e BCAAs",
+        price: 79.90,
+        oldPrice: 99.90,
+        rating: 4.5,
+        image: "bcaa-2400",
+        imageUrl: "images/bcaa-2400.png",
+        icon: "fas fa-flask",
+        tag: "Alta Leucina",
+        description: "BCAA em pó com proporção 4:1:1 enriquecido com leucina, para máxima síntese proteica e recuperação muscular.",
+        benefits: [
+            "Proporção 4:1:1 (leucina:isoleucina:valina)",
+            "7g de BCAAs por dose",
+            "Glutamina adicionada",
+            "Eletrólitos para hidratação",
+            "Sem carboidratos ou calorias"
+        ]
+    },
+    {
+        id: 12,
+        name: "BCAA 2400 - Combat",
+        category: "bcaa",
+        categoryName: "Aminoácidos e BCAAs",
+        price: 89.90,
+        oldPrice: 109.90,
+        rating: 4.3,
+        image: "bcaa-btx",
+        imageUrl: "images/bcaa-btx.png",
+        icon: "fas fa-flask",
+        tag: "Vegano",
+        description: "BCAA 100% vegano fermentado, não derivado de produtos animais, com adição de vitamina B6 para melhor absorção.",
+        benefits: [
+            "Proporção 2:1:1 clássica",
+            "Fermentação vegana - não animal",
+            "6g de BCAAs por dose",
+            "Vitamina B6 para máxima absorção",
+            "Zero açúcar e zero carboidratos"
+        ]
+    },
+    {
+        id: 13,
+        name: "BCAA Pro X - BC-X",
+        category: "bcaa",
+        categoryName: "Aminoácidos e BCAAs",
+        price: 109.90,
+        oldPrice: 129.90,
+        rating: 4.8,
+        image: "bcaa-prox",
+        imageUrl: "images/bcaa-prox.png",
+        icon: "fas fa-flask",
+        tag: "Fórmula Completa",
+        description: "Fórmula completa com todos os 9 aminoácidos essenciais (EAAs) incluindo BCAAs em proporção 2:1:1, para suporte completo à recuperação muscular.",
+        benefits: [
+            "Todos os 9 aminoácidos essenciais",
+            "Proporção cientificamente otimizada",
+            "10g de aminoácidos por dose",
+            "Melhor que BCAAs isolados",
+            "Biodisponibilidade superior"
+        ]
+    },
+    {
+        id: 14,
+        name: "Glutamina Pure - Darkness",
+        category: "bcaa",
+        categoryName: "Aminoácidos e BCAAs",
+        price: 79.90,
+        oldPrice: 89.90,
+        rating: 4.6,
+        image: "glu",
+        imageUrl: "images/glu.png",
+        icon: "fas fa-prescription-bottle",
+        tag: "Recuperação",
+        description: "L-Glutamina pura para recuperação muscular acelerada, fortalecimento do sistema imunológico e saúde intestinal.",
+        benefits: [
+            "5g de L-Glutamina por dose",
+            "Recuperação muscular acelerada",
+            "Fortalecimento do sistema imunológico",
+            "Saúde intestinal",
+            "Redução do catabolismo muscular"
+        ]
+        
+    },
+    // Hipercalóricos
+    {
+        id: 15,
+        name: "Hipercalórico Mass Gainer - Newnutrition",
+        category: "hypercaloric",
+        categoryName: "Hipercalóricos",
+        price: 159.90,
+        oldPrice: 189.90,
+        rating: 4.5,
+        image: "mass",
+        imageUrl: "images/mass.png",
+        icon: "fas fa-weight",
+        tag: "Ganho Máximo",
+        description: "Suplemento hipercalórico com 1250 calorias por dose, ideal para quem tem dificuldade em ganhar peso. Nos sabores chocolate, morango e baunilha.",
+        benefits: [
+            "1250 calorias por dose",
+            "50g de proteína blend",
+            "250g de carboidratos complexos",
+            "Baixo teor de gordura",
+            "Adição de creatina e glutamina"
+        ]
+    },
+    {
+        id: 16,
+        name: "Hipercalórico Dark Mass - Dark Lab",
+        category: "hypercaloric",
+        categoryName: "Hipercalóricos",
+        price: 199.90,
+        oldPrice: 239.90,
+        rating: 4.6,
+        image: "hiper",
+        imageUrl: "images/hiper.png",
+        icon: "fas fa-weight",
+        tag: "Econômico",
+        description: "Fórmula econômica em embalagem grande para quem busca ganho de peso a longo prazo, com carboidratos de diversas fontes.",
+        benefits: [
+            "Sabor: Chocolate e Morango",
+            "1000 calorias por dose",
+            "30g de proteína concentrada",
+            "200g de blend de carboidratos",
+            "Rico em vitaminas e minerais",
+            "Econômico - 50 doses por embalagem"
+        ]
+    },
+    // Vitaminas
+    {
+        id: 17,
+        name: "Multivitamínico - Fullife",
+        category: "vitamins",
+        categoryName: "Vitaminas e Multivitamínicos",
+        price: 69.90,
+        oldPrice: 79.90,
+        rating: 5,
+        image: "vitamin1",
+        imageUrl: "images/multivita.png",
+        icon: "fas fa-capsules",
+        tag: "Completo",
+        description: "Multivitamínico completo com mais de 30 nutrientes essenciais para saúde geral e desempenho físico.",
+        benefits: [
+            "100% ou mais da IDR de vitaminas",
+            "Minerais quelados de alta absorção",
+            "Antioxidantes extras",
+            "Complexo B para energia",
+            "90 cápsulas - 1 mês de suplementação"
+        ]
+    },
+    {
+        id: 18,
+        name: "Multivit - Nutralín",
+        category: "vitamins",
+        categoryName: "Vitaminas e Multivitamínicos",
+        price: 59.90,
+        oldPrice: 69.90,
+        rating: 4.6,
+        image: "vitamin3",
+        imageUrl: "images/multi.png",
+        icon: "fas fa-capsules",
+        tag: "Recuperação",
+        description: "Combinação de zinco, magnésio e vitamina B6 para melhora da recuperação, sono e níveis de testosterona natural.",
+        benefits: [
+            "30mg de zinco quelado",
+            "450mg de magnésio quelado",
+            "10mg de vitamina B6",
+            "Melhora qualidade do sono",
+            "Otimiza recuperação muscular"
+        ]
+    },
+    // Barras Proteicas
+    {
+        id: 19,
+        name: "Barra Proteíca - Max Titanium",
+        category: "protein-bars",
+        categoryName: "Pastas e Barras Proteicas",
+        price: 89.90,
+        oldPrice: 99.90,
+        rating: 4.5,
+        image: "barra1",
+        imageUrl: "images/barra1.png",
+        icon: "fas fa-cookie",
+        tag: "Mais Vendido",
+        description: "Barras proteicas com 30% de proteína, baixo teor de carboidratos e delicioso sabor.",
+        benefits: [
+            "15g de proteína por barra",
+            "Apenas 5g de carboidratos líquidos",
+            "Menos de 200 calorias",
+            "Diversos sabores disponíveis",
+            "Ideal para lanche entre refeições"
+        ]
+    },
+    {
+        id: 20,
+        name: "Pasta Proteíca - Dr.Peanut",
+        category: "protein-bars",
+        categoryName: "Pastas e Barras Proteicas",
+        price: 99.90,
+        oldPrice: 119.90,
+        rating: 4.7,
+        image: "pasta1",
+        imageUrl: "images/pasta1.png",
+        icon: "fas fa-cookie",
+        tag: "Low Carb",
+        description: "Pasta de amendoim enriquecida com proteína isolada do soro, zero açúcar e sem óleo de palma. Sabor Avelã.",
+        benefits: [
+            "Sabor: Avelã",
+            "10g de proteína por porção de 30g",
+            "Zero açúcar adicionado",
+            "Gorduras boas para o coração",
+            "Sem óleo de palma",
+            "Textura cremosa e irresistível"
+        ]
+    },
+    {
+        id: 21,
+        name: "Pasta Proteíca - Dr.Peanut",
+        category: "protein-bars",
+        categoryName: "Pastas e Barras Proteicas",
+        price: 49.90,
+        oldPrice: 59.90,
+        rating: 4.8,
+        image: "pasta2",
+        imageUrl: "images/pasta2.png",
+        icon: "fas fa-cookie",
+        tag: "Cremoso",
+        description: "Pasta de amendoim enriquecida com proteína isolada do soro, zero açúcar e sem óleo de palma. Sabor Brownie.",
+        benefits: [
+            "Sabor: Brownie",
+            "10g de proteína por porção de 30g",
+            "Zero açúcar adicionado",
+            "Gorduras boas para o coração",
+            "Sem óleo de palma",
+            "Textura cremosa e irresistível"
+        ]
+    },
+    
+    // Acessórios
+    {
+        id: 22,
+        name: "Luvas de Treino Pro",
+        category: "accessories",
+        categoryName: "Acessórios",
+        price: 49.90,
+        oldPrice: 69.90,
+        rating: 4.3,
+        image: "luva",
+        imageUrl: "images/luva.png",
+        icon: "fas fa-mitten",
+        tag: "Grip Máximo",
+        description: "Luvas de treino com proteção para palma e dedos, grip superior e suporte para pulso, ideais para treinos pesados.",
+        benefits: [
+            "Material sintético de alta durabilidade",
+            "Palmas reforçadas com silicone antiderrapante",
+            "Respirável para evitar suor excessivo",
+            "Proteção contra calos",
+            "Fácil de limpar e secar rapidamente"
+        ]
+    },
+    {
+        id: 23,
+        name: "Balança - Cadence",
+        category: "accessories",
+        categoryName: "Acessórios",
+        price: 59.90,
+        oldPrice: 79.90,
+        rating: 4.9,
+        image: "balac",
+        imageUrl: "images/balac.png",
+        icon: "fas fa-bone",
+        tag: "Competição",
+        description: "A balança alimentícia é um equipamento compacto e preciso, ideal para pesar alimentos e ingredientes com exatidão. Muito utilizada por quem segue dietas, cozinha com precisão ou busca um estilo de vida mais saudável.",
+        benefits: [
+            "Precisão nas porções",
+            "Aliada da dieta",
+            "Receitas mais exatas",
+            "Praticidade no dia a dia",
+            "Fácil de limpar e armazenar"
+        ]
+    },
+    {
+        id: 24,
+        name: "Power Bank - Landmerk",
+        category: "accessories",
+        categoryName: "Acessórios",
+        price: 39.90,
+        oldPrice: 49.90,
+        rating: 4.7,
+        image: "pwb",
+        imageUrl: "images/pwb.png",
+        icon: "fas fa-hands",
+        tag: "Carregador Portátil",
+        description: "O power bank é um carregador portátil que armazena energia para recarregar dispositivos eletrônicos, como celulares, tablets e fones de ouvido, sem a necessidade de uma tomada. Ideal para quem precisa de mobilidade e praticidade no dia a dia.",
+        benefits: [
+            "Carregamento em qualquer lugar",
+            "Compatível com vários dispositivos",
+            "Economia de tempo",
+            "Ideal para viagens e Treinos",
+            "Mais autonomia no dia a dia "
+        ]
+    },
+    
+    // Suplementos Hormonais Testo Boosters (nova categoria)
+    {
+        id: 25,
+        name: "Testo Boost - Crazyness",
+        category: "testo-booster",
+        categoryName: "Suplementos Hormonais Testo Boosters",
+        price: 179.90,
+        oldPrice: 199.90,
+        rating: 4.7,
+        image: "testo",
+        imageUrl: "images/testo.png",
+        icon: "fas fa-fire",
+        tag: "Aumento Natural",
+        description: "Fórmula avançada para aumentar naturalmente os níveis de testosterona, melhorando performance e ganhos musculares.",
+        benefits: [
+            "Aumento natural de testosterona",
+            "Melhora no desempenho atlético",
+            "Aumento da libido",
+            "Ingredientes naturais e seguros",
+            "Sem efeitos colaterais"
+        ]
+    },
+    {
+        id: 26,
+        name: "Tribulus - Force Factor",
+        category: "testo-booster",
+        categoryName: "Suplementos Hormonais Testo Boosters",
+        price: 129.90,
+        oldPrice: 159.90,
+        rating: 4.6,
+        image: "trib",
+        imageUrl: "images/trib.png",
+        icon: "fas fa-fire",
+        tag: "Força e Ação",
+        description: "Combinação de Tribulus Terrestris para potencializar a produção natural de testosterona.",
+        benefits: [
+            "Zinco e magnésio quelados para máxima absorção",
+            "1000mg de Tribulus Terrestris padronizado em 45% de saponinas",
+            "Melhora do sono e recuperação",
+            "Aumento de força e resistência",
+            "Suporte hormonal completo"
+        ]
+    },
+    {
+        id: 27,
+        name: "ZMA - Max Titanium",
+        category: "testo-booster",
+        categoryName: "Suplementos Hormonais Testo Boosters",
+        price: 59.90,
+        oldPrice: 69.90,
+        rating: 4.6,
+        image: "ZMA",
+        imageUrl: "images/ZMA.png",
+        icon: "fas fa-capsules",
+        tag: "Recuperação",
+        description: "Combinação de zinco, magnésio e vitamina B6 para melhora da recuperação, sono e níveis de testosterona natural.",
+        benefits: [
+            "30mg de zinco quelado",
+            "450mg de magnésio quelado",
+            "10mg de vitamina B6",
+            "Melhora qualidade do sono",
+            "Otimiza recuperação muscular"
+        ]
+    },
+    // Saúde e Bem-estar (nova categoria)
+    {
+        id: 28,
+        name: "Ômega 3 - Katiguã",
+        category: "health",
+        categoryName: "Saúde e Bem-estar",
+        price: 89.90,
+        oldPrice: 99.90,
+        rating: 4.8,
+        image: "ome3",
+        imageUrl: "images/ome3.png",
+        icon: "fas fa-heart",
+        tag: "Saúde Cardiovascular",
+        description: "Óleo de peixe rico em EPA e DHA, essenciais para saúde cardiovascular, cerebral e articular.",
+        benefits: [
+            "Alta concentração de EPA e DHA",
+            "Suporte à saúde cardiovascular",
+            "Melhora a função cerebral",
+            "Reduz inflamações",
+            "Cápsulas fáceis de engolir"
+        ]
+    },
+    {
+        id: 29,
+        name: "Colágeno Hidrolisado - Maxinutri",
+        category: "health",
+        categoryName: "Saúde e Bem-estar",
+        price: 79.90,
+        oldPrice: 99.90,
+        rating: 4.9,
+        image: "colage",
+        imageUrl: "images/colage.png",
+        icon: "fas fa-heart",
+        tag: "Pele e Articulações",
+        description: "Colágeno peptídeos de alta absorção com vitamina C para saúde da pele, cabelo, unhas e articulações.",
+        benefits: [
+            "10g de colágeno hidrolisado por dose",
+            "100mg de vitamina C para melhor síntese",
+            "Péptidos de baixo peso molecular",
+            "Sem sabor - pode ser misturado em qualquer bebida",
+            "Resultados visíveis em 30 dias"
+        ]
+    },
+    
+    // Repositor Energético Intra-Treino (nova categoria)
+    {
+        id: 30,
+        name: "Energy Elite Pro - Elite Labs",
+        category: "intra-workout",
+        categoryName: "Repositor Energético Intra-Treino",
+        price: 119.90,
+        oldPrice: 139.90,
+        rating: 4.5,
+        image: "energ",
+        imageUrl: "images/energ.png",
+        icon: "fas fa-bolt",
+        tag: "Energia Sustentada",
+        description: "Carboidratos de rápida absorção com eletrólitos para manter a energia durante treinos intensos.",
+        benefits: [
+            "Maltodextrina e dextrose",
+            "Eletrólitos para hidratação",
+            "Evita fadiga muscular",
+            "Sabor leve e refrescante",
+            "Dissolve facilmente"
+        ]
+    },
+    {
+        id: 31,
+        name: "Dextrose - Health Labs",
+        category: "intra-workout",
+        categoryName: "Repositor Energético Intra-Treino",
+        price: 109.90,
+        oldPrice: 159.90,
+        rating: 4.6,
+        image: "dextrose",
+        imageUrl: "images/dextrose.png",
+        icon: "fas fa-bolt",
+        tag: "Fórmula Completa",
+        description: "Fórmula completa com carboidratos cíclicos, BCAAs, eletrólitos e citrulina para máximo desempenho durante o treino.",
+        benefits: [
+            "Blend de carboidratos de assimilação variada",
+            "5g de BCAAs por dose",
+            "3g de Citrulina Malato",
+            "Eletrólitos completos (sódio, potássio, magnésio)",
+            "Zero corantes artificiais"
+        ]
+    },
+    {
+        id: 32,
+        name: "Maltodextrina - Body Action",
+        category: "intra-workout",
+        categoryName: "Repositor Energético Intra-Treino",
+        price: 59.90,
+        oldPrice: 69.90,
+        rating: 4.3,
+        image: "malto",
+        imageUrl: "images/malto.png",
+        icon: "fas fa-bolt",
+        tag: "Básico",
+        description: "Maltodextrina pura para reposição energética rápida durante ou após treinos intensos e de longa duração.",
+        benefits: [
+            "100% maltodextrina pura",
+            "Rápida disponibilidade energética",
+            "Sem sabor - pode ser misturado com qualquer bebida",
+            "Ideal para treinos longos",
+            "Alto rendimento - 50 porções por embalagem"
+        ]
+    },
+    
+];
+
+const categoryData = {
+    "whey": {
+        name: "Whey Protein",
+        description: "Whey Protein é uma proteína derivada do soro do leite, um subproduto da fabricação de queijo. É uma das proteínas de maior valor biológico, rica em aminoácidos essenciais e de rápida absorção, sendo ideal para consumo antes e após os treinos para recuperação e construção muscular."
+    },
+    "pre-workout": {
+        name: "Pré-Treino",
+        description: "Suplementos pré-treino são formulados para aumentar energia, foco, resistência e bombeamento muscular durante o exercício. Geralmente contêm uma combinação de ingredientes como cafeína, beta-alanina, citrulina malato, creatina e aminoácidos, proporcionando melhores resultados nos treinos."
+    },
+    "creatine": {
+        name: "Creatina",
+        description: "A creatina é um composto orgânico naturalmente produzido pelo corpo e também encontrado em alimentos como carne e peixe. Como suplemento, aumenta os estoques de fosfocreatina no músculo, fornecendo energia rápida para exercícios de alta intensidade, resultando em ganhos de força e massa muscular."
+    },
+    "thermogenic": {
+        name: "Termogênicos",
+        description: "Termogênicos são suplementos formulados para aumentar a temperatura corporal e a taxa metabólica, auxiliando na queima de gordura. Tipicamente contêm ingredientes como cafeína, extrato de chá verde, pimenta caiena e L-carnitina, que podem aumentar a energia, reduzir o apetite e otimizar o processo de queima de gordura."
+    },
+    "bcaa": {
+        name: "BCAA",
+        description: "BCAAs (Branched-Chain Amino Acids) são aminoácidos essenciais - leucina, isoleucina e valina - que desempenham um papel crucial na síntese proteica e recuperação muscular. Podem reduzir a fadiga durante o exercício, diminuir a dor muscular pós-treino e prevenir o catabolismo muscular."
+    },
+    "hypercaloric": {
+        name: "Hipercalóricos",
+        description: "Suplementos hipercalóricos são formulados com alta densidade calórica, ricos em carboidratos e proteínas, projetados para pessoas que têm dificuldade em ganhar peso ou precisam de um aporte calórico maior. Ideais para hard-gainers e atletas que querem aumentar massa muscular e precisam de calories extras."
+    },
+    "vitamins": {
+        name: "Vitaminas",
+        description: "Suplementos vitamínicos fornecem nutrientes essenciais que podem estar faltando na dieta diária. Para atletas e praticantes de atividade física, vitaminas e minerais adequados são fundamentais para otimizar o desempenho, recuperação, função imunológica e saúde geral."
+    },
+    "protein-bars": {
+        name: "Barras Proteicas",
+        description: "Barras proteicas são lanches convenientes e portáteis ricos em proteínas, ideais para consumo entre refeições, antes ou após os treinos. Oferecem uma alternativa prática quando não há acesso a refeições completas, ajudando a manter a ingestão proteica e saciar a fome."
+    },
+    "glutamine": {
+        name: "Glutamina",
+        description: "A glutamina é o aminoácido mais abundante no corpo humano e desempenha papéis cruciais na recuperação muscular, saúde intestinal e sistema imunológico. É especialmente importante para atletas e praticantes de atividade física intensa, pois os níveis podem diminuir significativamente após treinos exaustivos."
+    },
+    "accessories": {
+        name: "Acessórios",
+        description: "Acessórios para musculação incluem produtos que melhoram a eficácia e segurança dos treinos, como cintos, luvas, straps, joelheiras e faixas de punho. Esses itens ajudam a aprimorar a técnica, aumentar a carga nos exercícios, prevenir lesões e maximizar os resultados do seu treinamento."
+    },
+    "testo-booster": {
+        name: "Suplementos Hormonais Testo Boosters",
+        description: "Suplementos formulados para aumentar naturalmente os níveis de testosterona, melhorando performance, ganho muscular, libido e recuperação. Contêm ingredientes como tribulus terrestris, feno-grego, ashwagandha e D-AA, que ajudam a otimizar a produção hormonal de forma natural e segura."
+    },
+    
+    "health": {
+        name: "Saúde e Bem-estar",
+        description: "Suplementos nutricionais para saúde geral, incluindo ômega 3, vitaminas, minerais, probióticos e outros nutrientes essenciais que apoiam o funcionamento ideal do organismo, complementando a dieta e promovendo bem-estar e qualidade de vida."
+    },
+    
+    "intra-workout": {
+        name: "Repositor Energético Intra-Treino",
+        description: "Suplementos com carboidratos de rápida absorção e eletrólitos, desenvolvidos para serem consumidos durante o treino, mantendo os níveis de energia, retardando a fadiga e melhorando o desempenho em sessões prolongadas de exercício."
+    }
+};
+
+// *** Variáveis Globais ***
+let cart = [];
+let currentPage = 'home';
+let currentCategory = '';
+let carouselPosition = 0;
+let carouselInterval;
+let currentQuizQuestion = 1;
+let quizAnswers = {};
+
+// *** Funções de Inicialização ***
+document.addEventListener('DOMContentLoaded', () => {
+    // Iniciar navegação
+    setupNavigation();
+
+    // Iniciar carrossel
+    setupCarousel();
+
+    // Configurar botões de categoria
+    setupCategoryButtons();
+
+    // Configurar filtros de produtos
+    setupProductFilters();
+
+    // Carregar produtos na página de produtos
+    loadProducts();
+
+    // Configurar acordeão do guia
+    setupAccordion();
+
+    // Configurar modal de produto
+    setupProductModal();
+
+    // Configurar carrinho
+    setupCart();
+
+    // Configurar formulário de contato
+    setupContactForm();
+
+    // Configurar quiz 
+    setupQuiz();
+
+    // Configurar busca
+    setupSearch();
+    
+    // Configurar botões de plano personal
+    setupPersonalPlanButtons();
+    
+    // Configurar botão de agendar avaliação
+    setupScheduleEvaluationButton();
+    
+    // Configurar o botão "Saiba Mais" para ir para "Quem Somos"
+    setupSaibaMaisButton();
+    
+    // Configurar o botão mobile para o carrinho
+    setupMobileCart();
+    
+    // Configurar o botão de alternar tema claro/escuro
+    setupThemeToggle();
+});
+
+// *** Configuração de Componentes ***
+function setupNavigation() {
+    // Links de navegação desktop
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo(link.getAttribute('data-page'));
+        });
+    });
+
+    // Links de navegação mobile
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo(link.getAttribute('data-page'));
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+    });
+
+    // Botão de menu mobile
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    mobileMenuBtn.addEventListener('click', () => {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Logo (volta para home)
+    const logo = document.getElementById('logo');
+    logo.addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo('home');
+    });
+
+    // Botão de voltar para produtos
+    document.getElementById('back-to-products').addEventListener('click', (e) => {
+        e.preventDefault();
+        navigateTo('products');
+    });
+
+    // Links de rodapé
+    const footerLinks = document.querySelectorAll('footer a[data-page]');
+    footerLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo(link.getAttribute('data-page'));
+        });
+    });
+
+    // Links de categoria no rodapé
+    const footerCategoryLinks = document.querySelectorAll('footer a[data-category]');
+    footerCategoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateToCategory(link.getAttribute('data-category'));
+        });
+    });
+
+    // Link do quiz promocional
+    const quizPromoLink = document.querySelector('.bg-primary a[data-page="quiz"]');
+    if (quizPromoLink) {
+        quizPromoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('quiz');
+        });
+    }
+    
+    // Adicionar eventos para "Ver Todos os Produtos"
+    const allProductsLinks = document.querySelectorAll('a[data-page="products"]');
+    allProductsLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('products');
+        });
+    });
+}
+
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    
+    // Função para alternar o tema
+    const toggleTheme = () => {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    };
+    
+    // Adicionar evento ao botão do desktop
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    // Adicionar evento ao botão do mobile
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+    }
+}
+
+function setupMobileCart() {
+    const mobileCartBtn = document.getElementById('mobile-cart-btn');
+    if (mobileCartBtn) {
+        mobileCartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCart();
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+        
+        // Atualizar o contador do carrinho mobile também
+        const mobileCartCount = document.getElementById('mobile-cart-count');
+        if (mobileCartCount) {
+            mobileCartCount.textContent = cart.length > 0 ? cart.reduce((total, item) => total + item.quantity, 0) : '0';
+        }
+    }
+}
+
+function setupSaibaMaisButton() {
+    const saibaMaisBtn = document.getElementById('saiba-mais-btn');
+    if (saibaMaisBtn) {
+        saibaMaisBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigateTo('about');
+        });
+    }
+}
+
+function setupCarousel() {
+    const carousel = document.querySelector('.carousel-inner');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    const prevBtn = document.querySelector('.carousel-control-prev');
+    const nextBtn = document.querySelector('.carousel-control-next');
+    const items = document.querySelectorAll('.carousel-item');
+
+    // Configurar largura inicial
+    carousel.style.transform = `translateX(0)`;
+
+    // Configurar indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            goToSlide(index);
+        });
+    });
+
+    // Configurar botões de controle
+    prevBtn.addEventListener('click', () => {
+        goToSlide(carouselPosition - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        goToSlide(carouselPosition + 1);
+    });
+
+    // Iniciar rotação automática
+    startCarouselAutoRotation();
+
+    // Pausar rotação ao passar o mouse
+    carousel.addEventListener('mouseenter', stopCarouselAutoRotation);
+    carousel.addEventListener('mouseleave', startCarouselAutoRotation);
+
+    function goToSlide(position) {
+        // Garantir que position está dentro dos limites
+        if (position < 0) position = items.length - 1;
+        if (position >= items.length) position = 0;
+
+        // Atualizar posição atual
+        carouselPosition = position;
+
+        // Mover carrossel
+        carousel.style.transform = `translateX(-${position * 100}%)`;
+
+        // Atualizar indicadores
+        indicators.forEach((ind, i) => {
+            if (i === position) {
+                ind.classList.add('active');
+            } else {
+                ind.classList.remove('active');
+            }
+        });
+    }
+
+    function startCarouselAutoRotation() {
+        stopCarouselAutoRotation(); // Parar qualquer intervalo existente
+        carouselInterval = setInterval(() => {
+            goToSlide(carouselPosition + 1);
+        }, 5000);
+    }
+
+    function stopCarouselAutoRotation() {
+        if (carouselInterval) {
+            clearInterval(carouselInterval);
+        }
+    }
+}
+
+function setupCategoryButtons() {
+    const categoryCards = document.querySelectorAll('.category-card');
+
+    categoryCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const category = card.getAttribute('data-category');
+            navigateToCategory(category);
+        });
+
+        // Também adicionar evento ao botão interno
+        const button = card.querySelector('button');
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evitar duplo clique
+            const category = card.getAttribute('data-category');
+            navigateToCategory(category);
+        });
+    });
+}
+
+function setupProductFilters() {
+    const categoryFilter = document.getElementById('category-filter');
+    const sortFilter = document.getElementById('sort-filter');
+
+    categoryFilter.addEventListener('change', loadProducts);
+    sortFilter.addEventListener('change', loadProducts);
+}
+
+function setupAccordion() {
+    const accordionButtons = document.querySelectorAll('.supplement-accordion');
+
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Alternar ícone
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+
+            // Alternar painel
+            const panel = this.nextElementSibling;
+            panel.classList.toggle('active');
+        });
+    });
+}
+
+function setupProductModal() {
+    const modal = document.getElementById('product-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const decreaseBtn = document.getElementById('decrease-quantity');
+    const increaseBtn = document.getElementById('increase-quantity');
+    const quantityInput = document.getElementById('product-quantity');
+    const addToCartBtn = document.getElementById('modal-add-to-cart');
+    const buyNowBtn = document.getElementById('modal-buy-now');
+
+    // Fechar modal
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    modalOverlay.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    // Diminuir quantidade
+    decreaseBtn.addEventListener('click', () => {
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    });
+
+    // Aumentar quantidade
+    increaseBtn.addEventListener('click', () => {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    // Garantir que a quantidade seja sempre um número positivo
+    quantityInput.addEventListener('change', () => {
+        let value = parseInt(quantityInput.value);
+        if (isNaN(value) || value < 1) {
+            quantityInput.value = 1;
+        }
+    });
+
+    // Adicionar ao carrinho
+    addToCartBtn.addEventListener('click', () => {
+        const productId = parseInt(addToCartBtn.getAttribute('data-product-id'));
+        const quantity = parseInt(quantityInput.value);
+
+        addToCart(productId, quantity);
+        modal.classList.add('hidden');
+    });
+
+    // Comprar agora (adiciona ao carrinho e mostra o carrinho)
+    buyNowBtn.addEventListener('click', () => {
+        const productId = parseInt(addToCartBtn.getAttribute('data-product-id'));
+        const quantity = parseInt(quantityInput.value);
+
+        // Adicionar produto ao carrinho e mostrar carrinho
+        addToCart(productId, quantity);
+        
+        // Mostrar carrinho
+        showCart();
+        modal.classList.add('hidden');
+    });
+}
+
+function setupCart() {
+    const cartBtn = document.getElementById('cart-btn');
+    const closeCartBtn = document.getElementById('close-cart');
+    const continueShoppingBtn = document.getElementById('continue-shopping');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+    const backToCartBtn = document.getElementById('back-to-cart');
+    const finishOrderBtn = document.getElementById('finish-order');
+
+    // Abrir carrinho
+    cartBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showCart();
+    });
+
+    // Fechar carrinho
+    closeCartBtn.addEventListener('click', () => {
+        cartSidebar.style.transform = 'translateX(100%)';
+    });
+
+    // Continuar comprando
+    continueShoppingBtn.addEventListener('click', () => {
+        cartSidebar.style.transform = 'translateX(100%)';
+    });
+
+    // Prosseguir para checkout
+    proceedCheckoutBtn.addEventListener('click', () => {
+        showCheckoutForm();
+    });
+
+    // Voltar ao carrinho
+    backToCartBtn.addEventListener('click', () => {
+        hideCheckoutForm();
+    });
+
+    // Finalizar compra (enviar para WhatsApp)
+    finishOrderBtn.addEventListener('click', () => {
+        sendOrderToWhatsApp();
+    });
+}
+
+function setupContactForm() {
+    const sendMessageBtn = document.getElementById('send-message-btn');
+
+    sendMessageBtn.addEventListener('click', () => {
+        // Obter valores do formulário
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Verificar campos obrigatórios
+        if (!name || !email || !message) {
+            showAlert('Por favor, preencha todos os campos obrigatórios.', 'error');
+            return;
+        }
+        
+        // Preparar mensagem para WhatsApp
+        let whatsappMessage = `*Contato via Site - PowerSup*\n\n`;
+        whatsappMessage += `*Nome:* ${name}\n`;
+        whatsappMessage += `*Email:* ${email}\n`;
+        if (phone) whatsappMessage += `*Telefone:* ${phone}\n`;
+        if (subject) {
+            const subjectText = document.querySelector(`#subject option[value="${subject}"]`)?.textContent || subject;
+            whatsappMessage += `*Assunto:* ${subjectText}\n`;
+        }
+        whatsappMessage += `\n*Mensagem:*\n${message}`;
+        
+        // Enviar para WhatsApp
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappURL = `https://wa.me/5575991342279?text=${encodedMessage}`;
+        window.open(whatsappURL, '_blank');
+        
+        // Limpar formulário
+        document.getElementById('contact-form').reset();
+        
+        showAlert('Mensagem enviada com sucesso! Redirecionando para WhatsApp...');
+    });
+}
+
+function setupPersonalPlanButtons() {
+    const contractPlanButtons = document.querySelectorAll('.contract-plan-btn');
+    
+    contractPlanButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const planName = this.getAttribute('data-plan');
+            const planPrice = this.getAttribute('data-price');
+            
+            // Preparar mensagem para WhatsApp
+            let whatsappMessage = `*Interesse em Plano Personal - PowerSup*\n\n`;
+            whatsappMessage += `Olá! Tenho interesse no *${planName}* por ${planPrice}/mês.\n`;
+            whatsappMessage += `Gostaria de mais informações sobre este plano e como posso contratar.`;
+            
+            // Enviar para WhatsApp
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappURL = `https://wa.me/5575991342279?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+            
+            showAlert('Redirecionando para WhatsApp para finalizar contratação...');
+        });
+    });
+}
+
+function setupScheduleEvaluationButton() {
+    const scheduleEvalButton = document.getElementById('schedule-evaluation');
+    
+    scheduleEvalButton.addEventListener('click', function() {
+        // Preparar mensagem para WhatsApp
+        let whatsappMessage = `*Agendamento de Avaliação - PowerSup*\n\n`;
+        whatsappMessage += `Olá! Gostaria de agendar uma avaliação física gratuita com um Personal Trainer.\n`;
+        whatsappMessage += `Por favor, envie-me informações sobre disponibilidade de horários.`;
+        
+        // Enviar para WhatsApp
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        const whatsappURL = `https://wa.me/5575991342279?text=${encodedMessage}`;
+        window.open(whatsappURL, '_blank');
+        
+        showAlert('Redirecionando para WhatsApp para agendar avaliação...');
+    });
+}
+
+function setupQuiz() {
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    const nextButton = document.getElementById('next-question');
+    const prevButton = document.getElementById('prev-question');
+    const restartButton = document.getElementById('restart-quiz');
+
+    // Adicionar eventos aos botões do quiz
+    quizOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            // Remover seleção ativa de todas as opções da mesma pergunta
+            const questionElement = option.closest('.quiz-question');
+            const options = questionElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('border-primary', 'border-2');
+                opt.classList.add('bg-gray-100', 'dark:bg-gray-700');
+            });
+
+            // Destacar opção selecionada
+            option.classList.remove('bg-gray-100', 'dark:bg-gray-700');
+            option.classList.add('border-primary', 'border-2');
+
+            // Salvar resposta
+            const questionNum = parseInt(questionElement.getAttribute('data-question'));
+            const answerValue = option.getAttribute('data-value');
+            quizAnswers[questionNum] = answerValue;
+
+            // Habilitar botão próximo
+            nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            nextButton.disabled = false;
+        });
+    });
+
+    // Botão próximo
+    nextButton.addEventListener('click', () => {
+        if (currentQuizQuestion < 5) {
+            // Ir para próxima questão
+            goToQuizQuestion(currentQuizQuestion + 1);
+        } else {
+            // Mostrar resultados
+            showQuizResults();
+        }
+    });
+
+    // Botão anterior
+    prevButton.addEventListener('click', () => {
+        if (currentQuizQuestion > 1) {
+            goToQuizQuestion(currentQuizQuestion - 1);
+        }
+    });
+
+    // Botão reiniciar
+    restartButton.addEventListener('click', () => {
+        resetQuiz();
+    });
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-button');
+    const mobileSearchInput = document.getElementById('mobile-search-input');
+    const mobileSearchBtn = document.getElementById('mobile-search-button');
+
+    // Função de busca
+    const performSearch = (query) => {
+        if (query.trim() === '') return;
+
+        // Ir para página de produtos
+        navigateTo('products');
+
+        // Normalizar a consulta
+        const normalizedQuery = query.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+        // Filtrar produtos pelo termo de busca exato
+        const productsGrid = document.getElementById('products-grid');
+        const filteredProducts = productsDB.filter(product => {
+            // Normalizar texto do produto
+            const normalizedName = product.name.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+            const normalizedDesc = product.description.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+            const normalizedCategory = product.categoryName.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+                
+            // Verificar correspondência exata
+            return normalizedName.indexOf(normalizedQuery) !== -1 || 
+                   normalizedDesc.indexOf(normalizedQuery) !== -1 || 
+                   normalizedCategory.indexOf(normalizedQuery) !== -1;
+        });
+
+        // Mostrar resultados
+        if (filteredProducts.length === 0) {
+            productsGrid.innerHTML = `
+                <div class="col-span-full py-12 text-center">
+                    <i class="fas fa-search text-4xl text-gray-400 mb-4"></i>
+                    <p class="text-xl">Nenhum produto encontrado para "${query}".</p>
+                    <p class="mt-2">Tente outros termos ou navegue pelas categorias.</p>
+                </div>
+            `;
+        } else {
+            let productsHTML = '';
+            filteredProducts.forEach(product => {
+                productsHTML += createProductCardHTML(product);
+            });
+
+            productsGrid.innerHTML = `
+                <div class="col-span-full mb-4">
+                    <p class="text-lg">Resultados para: <span class="font-semibold">"${query}"</span> - ${filteredProducts.length} produto(s) encontrado(s)</p>
+                </div>
+                ${productsHTML}
+            `;
+
+            // Adicionar eventos aos botões de produto
+            setupProductCards();
+        }
+    };
+
+    // Desktop search
+    searchBtn.addEventListener('click', () => {
+        performSearch(searchInput.value);
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch(searchInput.value);
+        }
+    });
+
+    // Mobile search
+    mobileSearchBtn.addEventListener('click', () => {
+        performSearch(mobileSearchInput.value);
+        document.getElementById('mobile-menu').classList.add('hidden');
+    });
+
+    mobileSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch(mobileSearchInput.value);
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+    });
+}
+
+// *** Funções de Navegação ***
+function navigateTo(page) {
+    // Ocultar todas as páginas
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+
+    // Mostrar página selecionada
+    document.getElementById(page).classList.add('active');
+
+    // Atualizar links de navegação
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        if (link.getAttribute('data-page') === page) {
+            link.classList.add('font-bold', 'text-primary');
+        } else {
+            link.classList.remove('font-bold', 'text-primary');
+        }
+    });
+
+    // Atualizar links mobile
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        if (link.getAttribute('data-page') === page) {
+            link.classList.add('font-bold', 'text-primary');
+        } else {
+            link.classList.remove('font-bold', 'text-primary');
+        }
+    });
+
+    // Fechar menu mobile
+    document.getElementById('mobile-menu').classList.add('hidden');
+
+    // Rolar para o topo
+    window.scrollTo(0, 0);
+
+    // Atualizar página atual
+    currentPage = page;
+
+    // Carregar produtos se for página de produtos
+    if (page === 'products') {
+        loadProducts();
+    }
+
+    // Resetar quiz se for página de quiz
+    if (page === 'quiz') {
+        resetQuiz();
+    }
+}
+
+function navigateToCategory(category) {
+    // Mostrar página de categoria
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('category').classList.add('active');
+
+    // Atualizar conteúdo da categoria
+    document.getElementById('category-title').textContent = categoryData[category].name;
+    document.getElementById('category-description').textContent = categoryData[category].description;
+    currentCategory = category;
+
+    // Carregar produtos da categoria
+    loadCategoryProducts(category);
+
+    // Rolar para o topo
+    window.scrollTo(0, 0);
+}
+
+// *** Funções do Quiz ***
+function goToQuizQuestion(questionNum) {
+    // Ocultar todas as questões
+    const questions = document.querySelectorAll('.quiz-question');
+    questions.forEach(q => q.classList.remove('active'));
+
+    // Mostrar questão atual
+    const currentQuestion = document.querySelector(`.quiz-question[data-question="${questionNum}"]`);
+    currentQuestion.classList.add('active');
+
+    // Atualizar questão atual
+    currentQuizQuestion = questionNum;
+
+    // Atualizar botões
+    const prevButton = document.getElementById('prev-question');
+    const nextButton = document.getElementById('next-question');
+
+    // Botão anterior
+    if (questionNum === 1) {
+        prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+        prevButton.disabled = true;
+    } else {
+        prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        prevButton.disabled = false;
+    }
+
+    // Botão próximo
+    if (quizAnswers[questionNum]) {
+        nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        nextButton.disabled = false;
+    } else {
+        nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+        nextButton.disabled = true;
+    }
+
+    // Texto do botão próximo
+    if (questionNum === 5) {
+        nextButton.textContent = 'Ver Resultados';
+    } else {
+        nextButton.textContent = 'Próxima';
+    }
+
+    // Atualizar progresso
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const progressText = document.getElementById('quiz-progress-text');
+
+    let progress = 0;
+    if (questionNum === 'result') {
+        progress = 100;
+        document.getElementById('quiz-navigation').style.display = 'none';
+    } else {
+        progress = (questionNum - 1) * 20;
+        document.getElementById('quiz-navigation').style.display = 'flex';
+    }
+
+    progressBar.style.width = `${progress}%`;
+    progressText.textContent = `${progress}%`;
+}
+
+function showQuizResults() {
+    // Ocultar navegação
+    document.getElementById('quiz-navigation').style.display = 'none';
+
+    // Mostrar tela de resultado
+    const questions = document.querySelectorAll('.quiz-question');
+    questions.forEach(q => q.classList.remove('active'));
+    document.querySelector('.quiz-question[data-question="result"]').classList.add('active');
+
+    // Atualizar progresso
+    const progressBar = document.getElementById('quiz-progress-bar');
+    const progressText = document.getElementById('quiz-progress-text');
+    progressBar.style.width = '100%';
+    progressText.textContent = '100%';
+
+    // Exibir resultado
+    const resultsContainer = document.getElementById('quiz-results');
+    resultsContainer.innerHTML = '<div class="flex justify-center items-center py-12 col-span-full"><div class="spinner"></div></div>';
+
+    // Simular carregamento
+    setTimeout(() => {
+        // Determinar suplementos recomendados
+        let recommendedProducts = getRecommendedProducts();
+
+        // Exibir produtos recomendados
+        if (recommendedProducts.length === 0) {
+            resultsContainer.innerHTML = `
+                <div class="col-span-full py-8 text-center">
+                    <p>Não foi possível encontrar produtos específicos para suas necessidades. Por favor, entre em contato conosco para uma recomendação personalizada.</p>
+                </div>
+            `;
+        } else {
+            let resultsHTML = '';
+            recommendedProducts.forEach(product => {
+                // Usar as imagens locais dos produtos
+                resultsHTML += `
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold mb-2">${product.name}</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${product.description.substring(0, 100)}...</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-primary">R$ ${product.price.toFixed(2)}</span>
+                                <button class="bg-primary text-white px-3 py-1 rounded text-sm view-product-btn" data-id="${product.id}">Ver detalhes</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsContainer.innerHTML = resultsHTML;
+
+            // Adicionar eventos aos botões de visualização
+            const viewButtons = resultsContainer.querySelectorAll('.view-product-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const productId = parseInt(button.getAttribute('data-id'));
+                    openProductModal(productId);
+                });
+            });
+        }
+    }, 1500);
+}
+
+function getRecommendedProducts() {
+    // Lógica simplificada para recomendações com base nas respostas
+    let recommendedCategories = [];
+    let recommendedTags = [];
+
+   // Objetivo (Pergunta 1)
+   switch (quizAnswers[1]) {
+    case 'mass':
+        recommendedCategories.push('whey', 'creatine', 'hypercaloric', 'testo-booster');
+        break;
+    case 'definition':
+        recommendedCategories.push('whey', 'thermogenic', 'bcaa', 'health');
+        break;
+    case 'performance':
+        recommendedCategories.push('pre-workout', 'creatine', 'bcaa', 'intra-workout');
+        break;
+    case 'health':
+        recommendedCategories.push('vitamins', 'protein-bars', 'health');
+        break;
+}
+
+    // Frequência de treino (Pergunta 2)
+    switch (quizAnswers[2]) {
+        case 'beginner':
+            recommendedTags.push('Custo-Benefício');
+            break;
+        case 'intermediate':
+            // Sem tag específica
+            break;
+        case 'advanced':
+        case 'athlete':
+            recommendedTags.push('Premium', 'Profissional');
+            break;
+    }
+
+    // Filtrar produtos com base nas categorias e tags recomendadas
+    let recommendedProducts = productsDB.filter(product => {
+        const categoryMatch = recommendedCategories.includes(product.category);
+        const tagMatch = product.tag && recommendedTags.some(tag => product.tag.includes(tag));
+        return categoryMatch || tagMatch;
+    });
+
+    // Limitar a 4 produtos
+    recommendedProducts.sort((a, b) => {
+        const aScore = (recommendedCategories.includes(a.category) ? 1 : 0) +
+                       (a.tag && recommendedTags.some(tag => a.tag.includes(tag)) ? 1 : 0);
+        const bScore = (recommendedCategories.includes(b.category) ? 1 : 0) +
+                       (b.tag && recommendedTags.some(tag => b.tag.includes(tag)) ? 1 : 0);
+        return bScore - aScore;
+    });
+
+    return recommendedProducts.slice(0, 4);
+}
+
+function resetQuiz() {
+    // Resetar respostas
+    quizAnswers = {};
+
+    // Voltar para primeira questão
+    goToQuizQuestion(1);
+
+    // Limpar seleções
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach(option => {
+        option.classList.remove('border-primary', 'border-2');
+        option.classList.add('bg-gray-100', 'dark:bg-gray-700');
+    });
+
+    // Desabilitar botão próximo
+    const nextButton = document.getElementById('next-question');
+    nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+    nextButton.disabled = true;
+    nextButton.textContent = 'Próxima';
+
+    // Mostrar navegação
+    document.getElementById('quiz-navigation').style.display = 'flex';
+}
+
+// *** Funções de Carrinho ***
+function addToCart(productId, quantity = 1) {
+    const product = productsDB.find(p => p.id === productId);
+
+    if (!product) return;
+
+    // Verificar se o produto já está no carrinho
+    const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+    if (existingItemIndex >= 0) {
+        // Atualizar quantidade
+        cart[existingItemIndex].quantity += quantity;
+    } else {
+        // Adicionar novo item
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            imageUrl: product.imageUrl,
+            icon: product.icon,
+            quantity: quantity
+        });
+    }
+
+    // Atualizar contador do carrinho
+    updateCartCount();
+    
+    // Atualizar os itens do carrinho independente se estiver aberto ou não
+    updateCartItems();
+    
+    // Mostrar mensagem de adicionado ao carrinho
+    showAlert('Produto adicionado ao carrinho!');
+    
+    // Se o botão que foi clicado está na grid de produtos (não no modal)
+    const addToCartBtns = document.querySelectorAll(`.add-to-cart-btn[data-id="${productId}"]`);
+    if (addToCartBtns) {
+        addToCartBtns.forEach(btn => {
+            // Adiciona a classe para mudar a cor e texto
+            btn.classList.add('added', 'bg-green-600');
+            
+            // Salva o texto original
+            const originalHTML = btn.innerHTML;
+            
+            // Altera o texto para "Adicionado"
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i> Adicionado';
+            
+            // Após 2 segundos, volta ao normal
+            setTimeout(() => {
+                btn.classList.remove('added', 'bg-green-600');
+                btn.innerHTML = originalHTML;
+            }, 2000);
+        });
+    }
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartCount();
+    updateCartItems();
+}
+
+function updateCartCount() {
+    const cartCount = document.getElementById('cart-count');
+    const mobileCartCount = document.getElementById('mobile-cart-count');
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Atualizar o contador do desktop
+    if (cartCount) {
+        cartCount.textContent = totalItems;
+    }
+    
+    // Atualizar o contador do mobile
+    if (mobileCartCount) {
+        mobileCartCount.textContent = totalItems;
+    }
+
+    // Atualizar botão de checkout
+    const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+    if (proceedCheckoutBtn) {
+        if (totalItems > 0) {
+            proceedCheckoutBtn.disabled = false;
+            proceedCheckoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+            proceedCheckoutBtn.disabled = true;
+            proceedCheckoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    }
+}
+
+function updateCartItems() {
+    const cartItems = document.getElementById('cart-items');
+    const cartSubtotal = document.getElementById('cart-subtotal');
+
+    // Verificar se o carrinho está vazio
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                <p>Seu carrinho está vazio</p>
+            </div>
+        `;
+        cartSubtotal.textContent = 'R$ 0,00';
+        return;
+    }
+
+    // Criar HTML para itens do carrinho
+    let cartHTML = '';
+    let subtotal = 0;
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        cartHTML += `
+            <div class="flex items-center border-b border-gray-200 dark:border-gray-700 py-4">
+                <div class="w-16 h-16 rounded-lg overflow-hidden mr-4">
+                    <img src="${item.imageUrl}" alt="${item.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-grow">
+                    <h4 class="font-medium">${item.name}</h4>
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="flex items-center">
+                            <button class="cart-decrease w-6 h-6 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-l" data-id="${item.id}">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span class="w-8 h-6 flex items-center justify-center border-t border-b border-gray-300 dark:border-gray-600">${item.quantity}</span>
+                            <button class="cart-increase w-6 h-6 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-r" data-id="${item.id}">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                        <span class="font-medium">R$ ${item.price.toFixed(2)}</span>
+                    </div>
+                </div>
+                <button class="cart-remove ml-4 text-gray-400 hover:text-red-500" data-id="${item.id}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+    });
+
+    cartItems.innerHTML = cartHTML;
+    cartSubtotal.textContent = `R$ ${subtotal.toFixed(2)}`;
+
+    // Adicionar eventos aos botões
+    const decreaseButtons = document.querySelectorAll('.cart-decrease');
+    const increaseButtons = document.querySelectorAll('.cart-increase');
+    const removeButtons = document.querySelectorAll('.cart-remove');
+
+    decreaseButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const id = parseInt(button.getAttribute('data-id'));
+            const item = cart.find(item => item.id === id);
+
+            if (item && item.quantity > 1) {
+                item.quantity--;
+                updateCartCount();
+                updateCartItems();
+            }
+        });
+    });
+
+    increaseButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const id = parseInt(button.getAttribute('data-id'));
+            const item = cart.find(item => item.id === id);
+
+            if (item) {
+                item.quantity++;
+                updateCartCount();
+                updateCartItems();
+            }
+        });
+    });
+
+    removeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const id = parseInt(button.getAttribute('data-id'));
+            removeFromCart(id);
+        });
+    });
+}
+
+function showCart() {
+    const cartSidebar = document.getElementById('cart-sidebar');
+    updateCartItems();
+    hideCheckoutForm(); // Garantir que começa no carrinho, não no checkout
+    cartSidebar.style.transform = 'translateX(0)';
+}
+
+function showCheckoutForm() {
+    document.getElementById('cart-items').classList.add('hidden');
+    document.getElementById('cart-summary').classList.add('hidden');
+    document.getElementById('checkout-form').classList.remove('hidden');
+}
+
+function hideCheckoutForm() {
+    document.getElementById('cart-items').classList.remove('hidden');
+    document.getElementById('cart-summary').classList.remove('hidden');
+    document.getElementById('checkout-form').classList.add('hidden');
+}
+
+function sendOrderToWhatsApp() {
+    // Verifica se há produtos no carrinho
+    if (cart.length === 0) {
+        showAlert('Seu carrinho está vazio', 'error');
+        return;
+    }
+
+    // Recolhe informações do formulário
+    const name = document.getElementById('customer-name').value;
+    const address = document.getElementById('customer-address').value;
+    const number = document.getElementById('customer-number').value;
+    const complement = document.getElementById('customer-complement').value;
+    const neighborhood = document.getElementById('customer-neighborhood').value;
+    const city = document.getElementById('customer-city').value;
+    const state = document.getElementById('customer-state').value;
+    const cep = document.getElementById('customer-cep').value;
+    const phone = document.getElementById('customer-phone').value;
+
+    // Verifica campos obrigatórios
+    if (!name || !address || !number || !neighborhood || !city || !state || !cep || !phone) {
+        showAlert('Por favor, preencha todos os campos obrigatórios', 'error');
+        return;
+    }
+
+    // Obtém forma de pagamento selecionada
+    let paymentMethod = '';
+    if (document.getElementById('payment-method-pix').checked) {
+        paymentMethod = 'PIX';
+    } else if (document.getElementById('payment-method-credit').checked) {
+        paymentMethod = 'Cartão de Crédito';
+    } else if (document.getElementById('payment-method-cash').checked) {
+        paymentMethod = 'Dinheiro (na entrega)';
+    }
+
+    // Calcula valor total
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Prepara mensagem para WhatsApp
+    let message = `*NOVO PEDIDO - PowerSup*\n\n`;
+    message += `*Cliente:* ${name}\n`;
+    message += `*Telefone:* ${phone}\n\n`;
+    
+    message += `*Endereço de Entrega:*\n`;
+    message += `${address}, ${number}`;
+    if (complement) message += `, ${complement}`;
+    message += `\n${neighborhood}, ${city} - ${state}`;
+    message += `\nCEP: ${cep}\n\n`;
+    
+    message += `*Forma de Pagamento:* ${paymentMethod}\n\n`;
+    
+    message += `*Itens do Pedido:*\n`;
+    cart.forEach(item => {
+        const product = productsDB.find(p => p.id === item.id);
+        message += `• ${item.quantity}x ${item.name} - R$ ${(item.price * item.quantity).toFixed(2)}\n`;
+    });
+    
+    message += `\n*Total:* R$ ${total.toFixed(2)}`;
+
+    // Codificar a mensagem para URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Número de WhatsApp para envio (sem o +)
+    const whatsappNumber = "5575991342279";
+    
+    // Construir a URL do WhatsApp
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp em nova aba
+    window.open(whatsappUrl, '_blank');
+    
+    // Limpar carrinho após envio
+    cart = [];
+    updateCartCount();
+    
+    // Fechar carrinho lateral e mostrar mensagem de sucesso
+    document.getElementById('cart-sidebar').style.transform = 'translateX(100%)';
+    showAlert('Pedido enviado com sucesso! Redirecionando para o WhatsApp...', 'success');
+}
+
+// *** Funções de Produtos ***
+function loadProducts() {
+    const productsGrid = document.getElementById('products-grid');
+    const categoryFilter = document.getElementById('category-filter');
+    const sortFilter = document.getElementById('sort-filter');
+
+    // Mostrar spinner de carregamento
+    productsGrid.innerHTML = `
+        <div class="flex justify-center items-center py-12 col-span-full">
+            <div class="spinner"></div>
+        </div>
+    `;
+
+    // Simular atraso de carregamento
+    setTimeout(() => {
+        // Filtrar produtos
+        let filteredProducts = [...productsDB];
+
+        if (categoryFilter.value !== 'all') {
+            filteredProducts = filteredProducts.filter(product => product.category === categoryFilter.value);
+        }
+
+        // Ordenar produtos
+        switch (sortFilter.value) {
+            case 'name-asc':
+                filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'name-desc':
+                filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                break;
+            case 'price-asc':
+                filteredProducts.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-desc':
+                filteredProducts.sort((a, b) => b.price - a.price);
+                break;
+        }
+
+        // Gerar HTML dos produtos
+        if (filteredProducts.length === 0) {
+            productsGrid.innerHTML = `
+                <div class="col-span-full py-12 text-center">
+                    <i class="fas fa-search text-4xl text-gray-400 mb-4"></i>
+                    <p class="text-xl">Nenhum produto encontrado com os filtros selecionados.</p>
+                </div>
+            `;
+            return;
+        }
+
+        let productsHTML = '';
+
+        filteredProducts.forEach(product => {
+            productsHTML += createProductCardHTML(product);
+        });
+
+        productsGrid.innerHTML = productsHTML;
+
+        // Adicionar eventos aos botões de produto
+        setupProductCards();
+    }, 500);
+}
+
+function loadCategoryProducts(category) {
+    const categoryProducts = document.getElementById('category-products');
+
+    // Mostrar spinner de carregamento
+    categoryProducts.innerHTML = `
+        <div class="flex justify-center items-center py-12 col-span-full">
+            <div class="spinner"></div>
+        </div>
+    `;
+
+    // Simular atraso de carregamento
+    setTimeout(() => {
+        // Filtrar produtos da categoria
+        const filteredProducts = productsDB.filter(product => product.category === category);
+
+        // Gerar HTML dos produtos
+        if (filteredProducts.length === 0) {
+            categoryProducts.innerHTML = `
+                <div class="col-span-full py-12 text-center">
+                    <i class="fas fa-search text-4xl text-gray-400 mb-4"></i>
+                    <p class="text-xl">Nenhum produto encontrado nesta categoria.</p>
+                </div>
+            `;
+            return;
+        }
+
+        let productsHTML = '';
+
+        filteredProducts.forEach(product => {
+            productsHTML += createProductCardHTML(product);
+        });
+
+        categoryProducts.innerHTML = productsHTML;
+
+        // Adicionar eventos aos botões de produto
+        setupProductCards();
+    }, 500);
+}
+
+function createProductCardHTML(product) {
+    // Gerar estrelas de avaliação
+    const fullStars = Math.floor(product.rating);
+    const halfStar = product.rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    let starsHTML = '';
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<i class="fas fa-star"></i>';
+    }
+    if (halfStar) {
+        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<i class="far fa-star"></i>';
+    }
+
+    // Usar a imagem local do produto
+    return `
+        <div class="product-card bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all hover:-translate-y-2 hover:shadow-lg">
+            ${product.tag ? `<div class="product-tag bg-primary text-white">${product.tag}</div>` : ''}
+            <div class="h-48 bg-gray-200 dark:bg-gray-700 relative overflow-hidden group">
+                <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button class="view-product-btn bg-white text-primary px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition mr-2" data-id="${product.id}">
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+            <div class="p-4">
+                <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${product.categoryName}</div>
+                <h3 class="product-name text-lg font-bold mb-2">${product.name}</h3>
+                <div class="text-yellow-400 mb-3">${starsHTML}</div>
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        ${product.oldPrice ? `<span class="text-sm text-gray-500 dark:text-gray-400 line-through">R$ ${product.oldPrice.toFixed(2)}</span><br>` : ''}
+                        <span class="text-xl font-bold text-primary">R$ ${product.price.toFixed(2)}</span>
+                    </div>
+                    <button class="add-to-cart-btn px-3 py-2 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-opacity-90 transition" data-id="${product.id}">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        <span>Comprar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function setupProductCards() {
+    const viewButtons = document.querySelectorAll('.view-product-btn');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+    // Adicionar eventos aos botões de visualização
+    viewButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const productId = parseInt(button.getAttribute('data-id'));
+            openProductModal(productId);
+        });
+    });
+
+    // Adicionar eventos aos botões de comprar/adicionar ao carrinho
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const productId = parseInt(button.getAttribute('data-id'));
+            addToCart(productId);
+        });
+    });
+}
+
+function openProductModal(productId) {
+    const product = productsDB.find(p => p.id === productId);
+
+    if (!product) return;
+
+    // Preencher informações do produto
+    document.getElementById('modal-product-name').textContent = product.name;
+    document.getElementById('modal-product-category').textContent = product.categoryName;
+    document.getElementById('modal-product-description').textContent = product.description;
+
+    // Gerar estrelas de avaliação
+    const fullStars = Math.floor(product.rating);
+    const halfStar = product.rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    let starsHTML = '';
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<i class="fas fa-star"></i>';
+    }
+    if (halfStar) {
+        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<i class="far fa-star"></i>';
+    }
+
+    document.getElementById('modal-product-rating').innerHTML = starsHTML;
+
+    // Preencher preços
+    document.getElementById('modal-product-price').textContent = `R$ ${product.price.toFixed(2)}`;
+
+    if (product.oldPrice) {
+        document.getElementById('modal-product-old-price').textContent = `R$ ${product.oldPrice.toFixed(2)}`;
+        document.getElementById('modal-product-old-price').style.display = 'block';
+    } else {
+        document.getElementById('modal-product-old-price').style.display = 'none';
+    }
+
+    // Parcelas
+    document.getElementById('modal-product-installments').textContent = `ou 3x de R$ ${(product.price / 3).toFixed(2)} sem juros`;
+
+    // Usar a imagem local do produto
+    document.getElementById('modal-product-image').innerHTML = `<img src="${product.imageUrl}" alt="${product.name}" class="w-full h-full object-contain">`;
+
+    // Benefícios
+    const benefitsList = document.getElementById('modal-product-benefits');
+
+    let benefitsHTML = '';
+    product.benefits.forEach(benefit => {
+        benefitsHTML += `<li>${benefit}</li>`;
+    });
+
+    benefitsList.innerHTML = benefitsHTML;
+
+    // Definir ID do produto para os botões
+    document.getElementById('modal-add-to-cart').setAttribute('data-product-id', product.id);
+    document.getElementById('modal-buy-now').setAttribute('data-product-id', product.id);
+
+    // Resetar quantidade
+    document.getElementById('product-quantity').value = 1;
+
+    // Mostrar modal
+    document.getElementById('product-modal').classList.remove('hidden');
+}
+
+// *** Funções Utilitárias ***
+function showAlert(message, type = 'success') {
+    const alertMessage = document.getElementById('alert-message');
+    const alertText = document.getElementById('alert-text');
+
+    // Definir mensagem
+    alertText.textContent = message;
+
+    // Definir cor com base no tipo
+    if (type === 'success') {
+        alertMessage.classList.remove('bg-red-500', 'bg-blue-500');
+        alertMessage.classList.add('bg-green-500');
+    } else if (type === 'error') {
+        alertMessage.classList.remove('bg-green-500', 'bg-blue-500');
+        alertMessage.classList.add('bg-red-500');
+    } else if (type === 'info') {
+        alertMessage.classList.remove('bg-green-500', 'bg-red-500');
+        alertMessage.classList.add('bg-blue-500');
+    }
+
+    // Mostrar alerta
+    alertMessage.style.transform = 'translateY(0)';
+    alertMessage.style.opacity = '1';
+
+    // Ocultar após 3 segundos
+    setTimeout(() => {
+        alertMessage.style.transform = 'translateY(full)';
+        alertMessage.style.opacity = '0';
+    }, 3000);
+}
+        </script>
+</html>
